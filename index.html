@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mahmoud Mahgoub - Data Portfolio</title>
+    
+    <!-- Favicon for Browser Tab (Line Chart Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 3v18h18'/><path d='m19 9-5 5-4-4-3 3'/></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar & Top Logo */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-chart-icon {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+        }
+
+        .logo-name-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 8rem 0 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+            min-height: 80vh;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-frame {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            padding: 6px;
+            background: white;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transform: scale(1.6);
+            object-position: center 20%;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-location {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        /* Social & Contact Buttons */
+        .contact-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-gmail { background-color: #ea4335; color: white; }
+        .btn-gmail:hover { background-color: #c5221f; transform: translateY(-2px); color: white; }
+
+        .btn-linkedin { background-color: #0a66c2; color: white; }
+        .btn-linkedin:hover { background-color: #084e96; transform: translateY(-2px); color: white; }
+
+        .btn-whatsapp { background-color: #25d366; color: white; }
+        .btn-whatsapp:hover { background-color: #1da851; transform: translateY(-2px); color: white; }
+
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+        .btn-instagram:hover { transform: translateY(-2px); color: white; box-shadow: 0 4px 10px rgba(220, 39, 67, 0.3); }
+
+        .btn-facebook { background-color: #1877F2; color: white; }
+        .btn-facebook:hover { background-color: #145dbf; transform: translateY(-2px); color: white; }
+
+        .btn-tiktok { background-color: #000000; color: white; }
+        .btn-tiktok:hover { background-color: #333333; transform: translateY(-2px); color: white; }
+
+        .btn-github { background-color: #24292e; color: white; }
+        .btn-github:hover { background-color: #000000; transform: translateY(-2px); color: white; }
+
+        section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .skill-icon { font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem; }
+        .skill-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        
+        .tag {
+            background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px;
+            font-size: 0.85rem; color: var(--text-muted); font-weight: 600; border: 1px solid var(--border-color);
+        }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-color);
+        }
+
+        .project-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Certifications */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-color);
+        }
+
+        .cert-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .cert-title { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
+        .cert-issuer { font-size: 0.85rem; color: var(--text-muted); }
+
+        .cert-badge-loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #f0fdf4;
+            color: #166534;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            border: 1px solid #bbf7d0;
+        }
+
+        .cert-badge-completed {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; padding: 1.5rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-card {
+            background: white; border-radius: 16px; max-width: 850px; width: 100%;
+            max-height: 90vh; overflow-y: auto; position: relative; padding: 2rem;
+            box-shadow: var(--shadow-lg); animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .modal-close {
+            position: absolute; top: 1rem; right: 1.25rem; font-size: 1.5rem; color: var(--text-muted);
+            cursor: pointer; background: #f1f5f9; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;
+        }
+        .modal-close:hover { background: #e2e8f0; color: var(--primary-color); }
+        .modal-img { width: 100%; border-radius: 8px; box-shadow: var(--shadow-md); margin-top: 1rem; max-height: 65vh; object-fit: contain; background: #f8fafc; }
+
+        /* Footer without underlines */
+        footer { background: var(--primary-color); color: white; padding: 3rem 0 1.5rem; text-align: center; }
+        .footer-socials { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .footer-socials a { 
+            color: white; 
+            font-size: 1.3rem; 
+            transition: color 0.3s, transform 0.2s; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: rgba(255, 255, 255, 0.1); 
+            text-decoration: none;
+        }
+        .footer-socials a:hover { color: white; background: var(--accent-color); transform: translateY(-3px); text-decoration: none; }
+        .footer-copy { font-size: 0.85rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="logo-container">
+            <i class="fa-solid fa-chart-line logo-chart-icon"></i>
+            <span class="logo-name-text">Ahmed Mahmoud Mahgoub</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education & Certs</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="about" class="hero-section">
+            <div class="hero-text">
+                <h1 class="hero-title">Ahmed Mahmoud Mahgoub</h1>
+                <div class="hero-subtitle">Junior Data Analyst</div>
+                
+                <!-- Location Tag -->
+                <div class="hero-location">
+                    <i class="fa-solid fa-location-dot" style="color: #ef4444;"></i> Beheira, Egypt
+                </div>
+                
+                <!-- English Storytelling Description -->
+                <p class="hero-description">
+                    My tech journey started with a curiosity to understand how systems and algorithms operate, leading me to study Computer Science at Damanhour University and complete Harvard's CS50. That passion quickly evolved from writing code to making data speak—believing every dataset holds a story waiting to be uncovered. Currently, as a Data Analytics trainee in the Digital Egypt Pioneers Initiative (DEPI), I transform raw, complex data into dynamic dashboards and compelling visual stories that guide strategic decisions.
+                </p>
+                
+                <!-- Social & Contact Buttons -->
+                <div class="contact-buttons">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ahmdmhjwb680@gmail.com" target="_blank" class="btn btn-gmail"><i class="fa-solid fa-envelope"></i> Gmail</a>
+                    <a href="https://www.linkedin.com/in/ahmed-mahmoud-mahgoub/" target="_blank" class="btn btn-linkedin"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://wa.me/201555258879" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://www.instagram.com/_ahmed_mahgoub_/?hl=en" target="_blank" class="btn btn-instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" class="btn btn-facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://github.com/AhmedMahgoub2007" target="_blank" class="btn btn-github"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- Profile Frame -->
+            <div class="profile-frame">
+                <img src="https://lh3.googleusercontent.com/d/1-4uXX5j-VPNoJ-WThL8VH5190mSZB-jj" alt="Ahmed Mahmoud Mahgoub" class="profile-img">
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-file-excel"></i></div>
+                    <div class="skill-title">Advanced Data Analysis & Excel</div>
+                    <p class="project-desc">Building reporting dashboards, advanced ETL cleaning, and Pivot Table modeling.</p>
+                    <div class="skill-tags">
+                        <span class="tag">Microsoft Excel</span>
+                        <span class="tag">Power Query</span>
+                        <span class="tag">Power Pivot</span>
+                        <span class="tag">M Code</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div class="skill-title">Business Intelligence & Dashboards</div>
+                    <p class="project-desc">Designing dynamic, interactive visual interfaces tailored for executive decision-makers.</p>
+                    <div class="skill-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">DAX Measures</span>
+                        <span class="tag">Dashboard Design</span>
+                        <span class="tag">Data Visualization</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                    <div class="skill-title">Programming & Databases</div>
+                    <p class="project-desc">Large-scale data processing, querying relational databases, and algorithmic scripting.</p>
+                    <div class="skill-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Data Modeling</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: -1.5rem; margin-bottom: 1.5rem;">
+                <i class="fa-solid fa-circle-info"></i> Click on any project card to view its full interactive dashboard, key metrics, and Google Drive files.
+            </p>
+
+            <div class="projects-grid">
+                <!-- Project 1: Excel Superstore 2019 Card -->
+                <div class="project-card" onclick="openProjectModal('superstore')">
+                    <div>
+                        <div class="project-header">
+                            <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore 2019" class="project-icon-img">
+                            <div>
+                                <div class="project-card-title">Simple Superstore 2019</div>
+                                <span class="project-badge">Excel & Power Query</span>
+                            </div>
+                        </div>
+                        <p class="project-desc">Sales & Profit performance evaluation across product categories and regions for 2019.</p>
+                    </div>
+                    <div class="project-card-footer">
+                        <span><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Project 2: Power BI Central Region Card -->
+                <div class="project-card" onclick="openProjectModal('central')">
+                    <div>
+                        <div class="project-header">
+                            <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="project-icon-img">
+                            <div>
+                                <div class="project-card-title">Central Region Analysis</div>
+                                <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced</span>
+                            </div>
+                        </div>
+                        <p class="project-desc">In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.</p>
+                    </div>
+                    <div class="project-card-footer">
+                        <span><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications Section -->
+        <section id="education">
+            <h2 class="section-title">Education & Certifications</h2>
+            
+            <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem;">Certifications & Training Programs</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.</p>
+            
+            <div class="certs-grid">
+                <!-- DEPI Card -->
+                <div class="cert-card" onclick="openCertModal('depi')">
+                    <div>
+                        <div class="cert-header">
+                            <img src="https://lh3.googleusercontent.com/d/1h-Ldx0r2fkcigeHuxJI0WH7AtYAT23Pt" alt="DEPI Logo" class="cert-logo-img">
+                            <div>
+                                <div class="cert-title">Digital Egypt Pioneers Initiative (DEPI)</div>
+                                <div class="cert-issuer">Ministry of Communications (MCIT)</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Data Analytics Track covering Power BI, Power Query, SQL, and Python.</p>
+                    </div>
+                    <div>
+                        <span class="cert-badge-loading">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> In Progress
+                        </span>
+                    </div>
+                </div>
+
+                <!-- IBM Card -->
+                <div class="cert-card" onclick="openCertModal('ibm')">
+                    <div>
+                        <div class="cert-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo" class="cert-logo-img">
+                            <div>
+                                <div class="cert-title">Data Fundamentals</div>
+                                <div class="cert-issuer">IBM SkillsBuild</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Issued on: Aug 22, 2026 | Verified Official Certificate Document</p>
+                    </div>
+                    <div>
+                        <span class="cert-badge-completed"><i class="fa-solid fa-image"></i> View Official Certificate</span>
+                    </div>
+                </div>
+
+                <!-- Oracle Card -->
+                <div class="cert-card" onclick="openCertModal('oracle')">
+                    <div>
+                        <div class="cert-header">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" class="cert-logo-img">
+                            <div>
+                                <div class="cert-title">AI for You</div>
+                                <div class="cert-issuer">Oracle</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Advanced Training Program on AI Fundamentals & Applications by Oracle.</p>
+                    </div>
+                    <div>
+                        <span class="cert-badge-completed"><i class="fa-solid fa-image"></i> View Official Certificate Photo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact-us">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form-container">
+                <form onsubmit="event.preventDefault(); alert('Your message has been sent successfully! Thank you.');">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea rows="5" class="form-input" placeholder="How can I help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gmail" style="width: 100%; justify-content: center; font-size: 1.05rem;">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- PROJECT MODAL -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closeModal('projectModal')">&times;</span>
+            <div id="projectModalContent"></div>
+        </div>
+    </div>
+
+    <!-- CERTIFICATE MODAL -->
+    <div class="modal-overlay" id="certModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="closeModal('certModal')">&times;</span>
+            <div id="certModalContent"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-socials">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ahmdmhjwb680@gmail.com" target="_blank" title="Gmail"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ahmed-mahmoud-mahgoub/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://wa.me/201555258879" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/_ahmed_mahgoub_/?hl=en" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://github.com/AhmedMahgoub2007" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="footer-copy">All Rights Reserved © 2026 - Ahmed Mahmoud Mahgoub</p>
+        </div>
+    </footer>
+
+    <script>
+        function openProjectModal(project) {
+            const content = document.getElementById('projectModalContent');
+            if (project === 'superstore') {
+                content.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge">Excel & Power Query Project</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.8rem;">
+                        Simple Superstore 2019 - Sales & Profit Analysis
+                    </h2>
+                    <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        A comprehensive analytical project evaluating financial performance and profit drivers across product categories and geographical regions for Superstore 2019.
+                    </p>
+
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Dashboard" class="modal-img">
+                    </div>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
+                        <li>Cleaned data and handled returned orders using <strong>Power Query</strong> ETL transformations.</li>
+                        <li>Engineered an integrated data model and calculated net sales & profit with <strong>Power Pivot & DAX</strong>.</li>
+                        <li>Segmented sales across West, East, Central, and South regions to highlight top-performing states.</li>
+                        <li>Designed an interactive <strong>Sales & Profit Performance Dashboard</strong> tracking monthly trends.</li>
+                    </ul>
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="https://drive.google.com/drive/folders/1TTJddObN1tGQiEfHaBExZtF72GYhnBML?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
+                        </a>
+                    </div>
+                `;
+            } else if (project === 'central') {
+                content.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced Analytics</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.8rem;">
+                        Central Region Sales & Profit Analysis
+                    </h2>
+                    <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        In-depth performance study focused on the Central Region, identifying key loss-making categories, customer behavior, and shipping mode impacts on profit margins.
+                    </p>
+
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="modal-img">
+                    </div>
+
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
+                        <li>Executed extensive data cleaning and data type casting via <strong>Power Query</strong>.</li>
+                        <li>Classified products into Profitable vs. Loss-making segments across various categories.</li>
+                        <li>Analyzed sales distribution by customer, ship mode, and discount impacts on overall profit margin.</li>
+                        <li>Delivered an interactive multi-page <strong>Power BI Dashboard</strong> with dynamic segment filtering.</li>
+                    </ul>
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="https://drive.google.com/drive/folders/1WRKzEuzmsRUiKAx9uKJ3XK9mjxcoj4eV?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
+                        </a>
+                    </div>
+                `;
+            }
+            document.getElementById('projectModal').classList.add('active');
+        }
+
+        function openCertModal(type) {
+            const content = document.getElementById('certModalContent');
+            if(type === 'ibm') {
+                content.innerHTML = `
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" style="height: 24px;"> IBM Data Fundamentals Certificate
+                    </h3>
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/18_5sMJJ9XGlE8GTtZyYPXvKurq6tukOv" alt="IBM Certificate Photo" class="modal-img">
+                    </div>
+                `;
+            } else if(type === 'oracle') {
+                content.innerHTML = `
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" style="height: 20px;"> Oracle AI for You Certificate
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1rem;">Official Certificate Document issued by Oracle.</p>
+                    <div style="text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1f8TNf2ox1wnUmXMJYwR77M7vLbSlq1-w" alt="Oracle Certificate Photo" class="modal-img" style="border: 1px solid #e2e8f0;">
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/file/d/1f8TNf2ox1wnUmXMJYwR77M7vLbSlq1-w/view?usp=drive_link" target="_blank" class="btn btn-gmail"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Original Image in Drive</a>
+                    </div>
+                `;
+            } else if(type === 'depi') {
+                content.innerHTML = `
+                    <div style="padding: 1.5rem; text-align: center;">
+                        <img src="https://lh3.googleusercontent.com/d/1h-Ldx0r2fkcigeHuxJI0WH7AtYAT23Pt" style="height: 90px; margin-bottom: 1rem; object-fit: contain;">
+                        <h2 style="color: #0f172a; font-weight: 800; font-size: 1.5rem;">Digital Egypt Pioneers Initiative (DEPI)</h2>
+                        <p style="color: #64748b; font-weight: 700; margin-top: 0.3rem;">Ministry of Communications and Information Technology (MCIT)</p>
+                        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #e2e8f0;">
+                        <h4 style="color: #0f172a; font-size: 1.1rem; font-weight: 700;">Data Analytics Track</h4>
+                        <p style="color: #475569; font-size: 0.95rem; margin-top: 0.5rem;">
+                            Covering Power BI, Power Query, Advanced Excel, SQL, and Python Data Analysis.
+                        </p>
+                        <div style="margin-top: 1.5rem;" class="cert-badge-loading">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> In Progress
+                        </div>
+                    </div>
+                `;
+            }
+            document.getElementById('certModal').classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
