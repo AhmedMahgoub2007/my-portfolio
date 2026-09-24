@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Light Theme Variables */
         :root {
             --primary-color: #0f172a;
             --accent-color: #2563eb;
@@ -22,15 +23,44 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --modal-bg: #ffffff;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(37, 99, 235, 0.15), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --primary-color: #f8fafc;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --bg-light: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --nav-bg: rgba(15, 23, 42, 0.95);
+            --modal-bg: #1e293b;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5);
+            --shadow-hover: 0 20px 25px -5px rgba(59, 130, 246, 0.25);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+
+        html[lang="ar"] body {
+            font-family: 'Alexandria', 'Inter', sans-serif;
+        }
+
+        html[lang="en"] body {
             font-family: 'Inter', sans-serif;
         }
 
@@ -41,13 +71,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--primary-color);
-            z-index: 9999;
+            background-color: #0f172a;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
         
         #intro-screen.slide-up {
@@ -80,12 +110,12 @@
         .scroll-hidden {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.7s cubic-bezier(0.5, 0, 0, 1);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
         .scroll-show {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         /* --- Typewriter Cursor Style --- */
@@ -102,8 +132,6 @@
             50% { opacity: 0; }
         }
 
-        /* -------------------------------- */
-
         body {
             background-color: var(--bg-light);
             color: var(--text-main);
@@ -111,13 +139,13 @@
             scroll-behavior: smooth;
         }
 
-        /* Navbar & Top Logo */
+        /* Navbar & Controls */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: var(--nav-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -137,18 +165,29 @@
         .logo-chart-icon {
             font-size: 2.2rem;
             color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-chart-icon {
+            transform: scale(1.15) rotate(-5deg);
         }
 
         .logo-name-text {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--accent-color);
             letter-spacing: -0.3px;
         }
 
+        .nav-right-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             list-style: none;
             align-items: center;
         }
@@ -158,50 +197,86 @@
             color: var(--text-main);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
             color: var(--accent-color);
         }
 
-        /* --- Mobile Menu Toggle --- */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: 0.3s;
+        /* Toggle Action Buttons (Theme & Lang) */
+        .controls-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
-        /* Responsive Design for Navbar */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .logo-name-text {
-                font-size: 1.2rem;
-            }
+        .btn-control {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-control:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: block; }
             .nav-links {
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.98);
+                background-color: var(--nav-bg);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 padding: 1.5rem 0;
-                gap: 1.5rem;
-                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                gap: 1.2rem;
+                box-shadow: var(--shadow-md);
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.4s ease-in-out;
+                border-bottom: 1px solid var(--border-color);
             }
             .nav-links.active {
                 clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            }
-            .nav-links a {
-                font-size: 1.1rem;
             }
         }
 
@@ -233,13 +308,19 @@
             border-radius: 50%;
             border: 5px solid var(--accent-color);
             padding: 6px;
-            background: white;
+            background: var(--card-bg);
             box-shadow: var(--shadow-lg);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             margin: 0 auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .profile-frame:hover {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-hover);
         }
 
         .profile-img {
@@ -249,6 +330,11 @@
             object-fit: cover;
             transform: scale(1.6);
             object-position: center 20%;
+            transition: transform 0.4s ease;
+        }
+
+        .profile-frame:hover .profile-img {
+            transform: scale(1.68);
         }
 
         .hero-title {
@@ -285,7 +371,7 @@
             text-align: justify;
         }
 
-        /* Primary Call-To-Action Area (CV & Contact) */
+        /* Primary Action Buttons */
         .primary-actions {
             display: flex;
             gap: 1rem;
@@ -295,7 +381,7 @@
 
         .btn-cv-primary {
             background-color: var(--accent-color);
-            color: white;
+            color: white !important;
             padding: 0.85rem 1.6rem;
             font-size: 1rem;
             font-weight: 700;
@@ -305,20 +391,18 @@
             align-items: center;
             gap: 0.6rem;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-            transition: all 0.3s;
         }
 
         .btn-cv-primary:hover {
             background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
-            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.38);
         }
 
         .btn-outline-primary {
             background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
             padding: 0.85rem 1.6rem;
             font-size: 1rem;
             font-weight: 700;
@@ -327,16 +411,16 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            transition: all 0.3s;
         }
 
         .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Social & Contact Buttons Grid */
+        /* Social Buttons Grid */
         .contact-buttons {
             display: flex;
             gap: 0.8rem;
@@ -351,51 +435,53 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.3s;
             font-size: 0.9rem;
             cursor: pointer;
             border: none;
+            box-shadow: var(--shadow-sm);
         }
 
-        .btn-gmail { background-color: #ea4335; color: white; }
-        .btn-gmail:hover { background-color: #c5221f; transform: translateY(-2px); color: white; }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
 
-        .btn-linkedin { background-color: #0a66c2; color: white; }
-        .btn-linkedin:hover { background-color: #084e96; transform: translateY(-2px); color: white; }
+        .btn-gmail { background-color: #ea4335; color: white !important; }
+        .btn-gmail:hover { background-color: #c5221f; }
 
-        .btn-whatsapp { background-color: #25d366; color: white; }
-        .btn-whatsapp:hover { background-color: #1da851; transform: translateY(-2px); color: white; }
+        .btn-linkedin { background-color: #0a66c2; color: white !important; }
+        .btn-linkedin:hover { background-color: #084e96; }
 
-        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
-        .btn-instagram:hover { transform: translateY(-2px); color: white; box-shadow: 0 4px 10px rgba(220, 39, 67, 0.3); }
+        .btn-whatsapp { background-color: #25d366; color: white !important; }
+        .btn-whatsapp:hover { background-color: #1da851; }
 
-        .btn-facebook { background-color: #1877F2; color: white; }
-        .btn-facebook:hover { background-color: #145dbf; transform: translateY(-2px); color: white; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white !important; }
 
-        .btn-tiktok { background-color: #000000; color: white; }
-        .btn-tiktok:hover { background-color: #333333; transform: translateY(-2px); color: white; }
+        .btn-facebook { background-color: #1877F2; color: white !important; }
+        .btn-facebook:hover { background-color: #145dbf; }
 
-        .btn-github { background-color: #24292e; color: white; }
-        .btn-github:hover { background-color: #000000; transform: translateY(-2px); color: white; }
+        .btn-tiktok { background-color: #000000; color: white !important; }
+        .btn-tiktok:hover { background-color: #333333; }
 
-        /* Freelance Custom Buttons */
-        .btn-upwork { background-color: #14a800; color: white; }
-        .btn-upwork:hover { background-color: #118d00; transform: translateY(-2px); color: white; }
+        .btn-github { background-color: #24292e; color: white !important; }
+        .btn-github:hover { background-color: #000000; }
 
-        .btn-mostaql { background-color: #1d71b8; color: white; }
-        .btn-mostaql:hover { background-color: #165891; transform: translateY(-2px); color: white; }
+        .btn-upwork { background-color: #14a800; color: white !important; }
+        .btn-upwork:hover { background-color: #118d00; }
 
-        .btn-freelancer { background-color: #29b2fe; color: white; }
-        .btn-freelancer:hover { background-color: #119be8; transform: translateY(-2px); color: white; }
+        .btn-mostaql { background-color: #1d71b8; color: white !important; }
+        .btn-mostaql:hover { background-color: #165891; }
 
-        .btn-khamsat { background-color: #ff9900; color: white; }
-        .btn-khamsat:hover { background-color: #e08700; transform: translateY(-2px); color: white; }
+        .btn-freelancer { background-color: #29b2fe; color: white !important; }
+        .btn-freelancer:hover { background-color: #119be8; }
+
+        .btn-khamsat { background-color: #ff9900; color: white !important; }
+        .btn-khamsat:hover { background-color: #e08700; }
 
         .btn-platform-img {
             width: 18px;
             height: 18px;
             object-fit: contain;
-            vertical-align: middle;
             border-radius: 3px;
         }
 
@@ -421,9 +507,14 @@
             background-color: var(--accent-color);
             margin: 0.5rem auto 0;
             border-radius: 2px;
+            transition: width 0.3s ease;
         }
 
-        /* Skills */
+        .section-title:hover::after {
+            width: 100px;
+        }
+
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -436,17 +527,38 @@
             border-radius: 12px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .skill-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .skill-icon { font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem; }
-        .skill-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .skill-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-color);
+        }
+
+        .skill-icon { 
+            font-size: 2rem; 
+            color: var(--accent-color); 
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .skill-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
         
         .tag {
             background: var(--bg-light); padding: 0.3rem 0.8rem; border-radius: 20px;
             font-size: 0.85rem; color: var(--text-muted); font-weight: 600; border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
         }
+
+        .skill-card:hover .tag {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
         .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
 
         /* Projects Grid */
@@ -466,13 +578,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
             border-color: var(--accent-color);
         }
 
@@ -490,6 +601,11 @@
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid var(--border-color);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-icon-img {
+            transform: scale(1.02);
         }
 
         .project-card-title {
@@ -498,6 +614,11 @@
             color: var(--primary-color);
             line-height: 1.3;
             margin-bottom: 0.3rem;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-card-title {
+            color: var(--accent-color);
         }
 
         .project-badge {
@@ -527,6 +648,18 @@
             color: var(--accent-color);
         }
 
+        .project-card-footer i {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-card-footer i {
+            transform: translateX(6px);
+        }
+
+        html[dir="rtl"] .project-card:hover .project-card-footer i {
+            transform: translateX(-6px);
+        }
+
         /* Certifications & Education */
         .certs-grid {
             display: grid;
@@ -544,13 +677,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s;
             cursor: pointer;
         }
 
         .cert-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
             border-color: var(--accent-color);
         }
 
@@ -566,6 +698,11 @@
             height: 50px;
             object-fit: contain;
             border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover .cert-logo-img {
+            transform: scale(1.1);
         }
 
         .cert-title { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
@@ -600,7 +737,7 @@
         .contact-form-container {
             max-width: 650px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 16px;
             box-shadow: var(--shadow-md);
@@ -623,16 +760,17 @@
             width: 100%;
             padding: 0.9rem;
             border: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+            color: var(--text-main);
             border-radius: 8px;
             font-family: inherit;
             font-size: 0.95rem;
-            transition: border-color 0.3s;
         }
 
         .form-input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
         /* Modals */
@@ -645,27 +783,28 @@
         }
         .modal-overlay.active { display: flex; }
         .modal-card {
-            background: white; border-radius: 16px; max-width: 850px; width: 100%;
+            background: var(--modal-bg); border-radius: 16px; max-width: 850px; width: 100%;
             max-height: 90vh; overflow-y: auto; position: relative; padding: 2rem;
-            box-shadow: var(--shadow-lg); animation: modalFadeIn 0.3s ease;
+            box-shadow: var(--shadow-lg); animation: modalFadeIn 0.3s ease; color: var(--text-main);
+            border: 1px solid var(--border-color);
         }
         @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
         .modal-close {
             position: absolute; top: 1rem; right: 1.25rem; font-size: 1.5rem; color: var(--text-muted);
-            cursor: pointer; background: #f1f5f9; width: 36px; height: 36px; border-radius: 50%;
+            cursor: pointer; background: var(--bg-light); width: 36px; height: 36px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;
         }
-        .modal-close:hover { background: #e2e8f0; color: var(--primary-color); }
-        .modal-img { width: 100%; border-radius: 8px; box-shadow: var(--shadow-md); margin-top: 1rem; max-height: 65vh; object-fit: contain; background: #f8fafc; }
+        html[dir="rtl"] .modal-close { right: auto; left: 1.25rem; }
+        .modal-close:hover { background: var(--border-color); color: var(--primary-color); transform: rotate(90deg); }
+        .modal-img { width: 100%; border-radius: 8px; box-shadow: var(--shadow-md); margin-top: 1rem; max-height: 65vh; object-fit: contain; background: var(--bg-light); }
 
         /* Footer */
-        footer { background: var(--primary-color); color: white; padding: 3rem 0 1.5rem; text-align: center; }
+        footer { background: #0f172a; color: white; padding: 3rem 0 1.5rem; text-align: center; }
         .footer-socials { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .footer-socials a { 
             color: white; 
             font-size: 1.3rem; 
-            transition: color 0.3s, transform 0.2s; 
             display: inline-flex; 
             align-items: center; 
             justify-content: center; 
@@ -675,13 +814,8 @@
             background: rgba(255, 255, 255, 0.1); 
             text-decoration: none;
         }
-        .footer-socials a:hover { color: white; background: var(--accent-color); transform: translateY(-3px); text-decoration: none; }
-        .footer-custom-icon {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            border-radius: 4px;
-        }
+        .footer-socials a:hover { color: white; background: var(--accent-color); transform: translateY(-4px) scale(1.1); }
+        .footer-custom-icon { width: 28px; height: 28px; object-fit: contain; border-radius: 4px; }
         .footer-copy { font-size: 0.85rem; color: #94a3b8; }
     </style>
 </head>
@@ -690,53 +824,88 @@
     <!-- Intro Screen -->
     <div id="intro-screen">
         <i class="fa-solid fa-chart-line logo-chart-icon intro-icon"></i>
-        <h1 class="intro-name">Ahmed Mahmoud Mahgoub</h1>
+        <h1 class="intro-name" data-i18n="name">Ahmed Mahmoud Mahgoub</h1>
     </div>
+
+    <!-- Independent Bulletproof Intro Screen Script -->
+    <script>
+        (function() {
+            function dismissIntro() {
+                var el = document.getElementById('intro-screen');
+                if (el && !el.classList.contains('slide-up')) {
+                    el.classList.add('slide-up');
+                    setTimeout(function() {
+                        el.style.display = 'none';
+                    }, 800);
+                }
+            }
+
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setTimeout(dismissIntro, 1000);
+            } else {
+                document.addEventListener('DOMContentLoaded', function() { setTimeout(dismissIntro, 1000); });
+                window.addEventListener('load', function() { setTimeout(dismissIntro, 1000); });
+            }
+
+            setTimeout(dismissIntro, 2000);
+        })();
+    </script>
 
     <!-- Navigation Bar -->
     <nav>
         <a href="#" class="logo-container">
             <i class="fa-solid fa-chart-line logo-chart-icon"></i>
-            <span class="logo-name-text">Ahmed Mahmoud Mahgoub</span>
+            <span class="logo-name-text" data-i18n="name">Ahmed Mahmoud Mahgoub</span>
         </a>
-        <!-- Mobile Hamburger Icon -->
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="fa-solid fa-bars"></i>
+
+        <div class="nav-right-controls">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" data-i18n="nav_about">About</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+                <li><a href="#education" data-i18n="nav_education">Education & Certs</a></li>
+                <li><a href="#contact-us" data-i18n="nav_contact">Contact</a></li>
+            </ul>
+
+            <!-- Controls: Language & Theme Switches -->
+            <div class="controls-group">
+                <button class="btn-control" id="lang-toggle" title="Switch Language">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="lang-text">AR</span>
+                </button>
+                <button class="btn-control" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </button>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
         </div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#education">Education & Certs</a></li>
-            <li><a href="#contact-us">Contact</a></li>
-        </ul>
     </nav>
 
     <div class="container">
         <!-- Hero Section -->
         <section id="about" class="hero-section scroll-hidden">
             <div class="hero-text">
-                <h1 class="hero-title">Ahmed Mahmoud Mahgoub</h1>
+                <h1 class="hero-title" data-i18n="name">Ahmed Mahmoud Mahgoub</h1>
                 <div class="hero-subtitle">
                     <span id="typewriter"></span><span class="type-cursor">&nbsp;</span>
                 </div>
                 
-                <!-- Location Tag -->
                 <div class="hero-location">
-                    <i class="fa-solid fa-location-dot" style="color: #ef4444;"></i> Beheira, Egypt
+                    <i class="fa-solid fa-location-dot" style="color: #ef4444;"></i> <span data-i18n="location">Beheira, Egypt</span>
                 </div>
                 
-                <!-- English Storytelling Description -->
-                <p class="hero-description">
+                <p class="hero-description" data-i18n="hero_desc">
                     My tech journey started with a curiosity to understand how systems and algorithms operate, leading me to study Computer Science at Damanhour University and complete Harvard's CS50. That passion quickly evolved from writing code to making data speak—believing every dataset holds a story waiting to be uncovered. Currently, as a Data Analytics trainee in the Digital Egypt Pioneers Initiative (DEPI), I transform raw, complex data into dynamic dashboards and compelling visual stories that guide strategic decisions.
                 </p>
                 
-                <!-- Primary Action Area (Download CV & Contact Me) -->
+                <!-- Primary Action Area -->
                 <div class="primary-actions">
-                    <a href="https://docs.google.com/document/d/1rJWkdsM9R0NiPZ41lKMPDiHDbwtgOaGLzTY-8biYO30/edit?usp=sharing" target="_blank" class="btn-cv-primary">
+                    <a href="https://docs.google.com/document/d/1rJWkdsM9R0NiPZ41lKMPDiHDbwtgOaGLzTY-8biYO30/edit?usp=sharing" target="_blank" class="btn-cv-primary" data-i18n="btn_cv">
                         <i class="fa-solid fa-file-lines"></i> View / Download CV
                     </a>
-                    <a href="#contact-us" class="btn-outline-primary">
+                    <a href="#contact-us" class="btn-outline-primary" data-i18n="btn_contact">
                         <i class="fa-solid fa-paper-plane"></i> Get In Touch
                     </a>
                 </div>
@@ -750,7 +919,6 @@
                     <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" class="btn btn-facebook"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i></a>
                     <a href="https://github.com/AhmedMahgoub2007" target="_blank" class="btn btn-github"><i class="fa-brands fa-github"></i></a>
-                    <!-- Freelance Platform Buttons -->
                     <a href="https://www.upwork.com/freelancers/~010a58d156da706d2c" target="_blank" class="btn btn-upwork" title="Upwork"><img src="https://lh3.googleusercontent.com/d/15qHU4FZQaapHKPHbo7genTKEXlWgqApp" alt="Upwork" class="btn-platform-img"> Upwork</a>
                     <a href="https://mostaql.com/u/Ahmed__Mahgoub" target="_blank" class="btn btn-mostaql" title="مستقل"><img src="https://lh3.googleusercontent.com/d/19zTlPTZNASxigPtEukCJELykyGLTtfeo" alt="مستقل" class="btn-platform-img"> Mostaql</a>
                     <a href="https://www.freelancer.com/u/AhmedMahoub" target="_blank" class="btn btn-freelancer" title="Freelancer"><img src="https://lh3.googleusercontent.com/d/1msTD7V9BrFrgSndQZ52i-gNhDkouz2J0" alt="Freelancer" class="btn-platform-img"> Freelancer</a>
@@ -758,7 +926,6 @@
                 </div>
             </div>
 
-            <!-- Profile Frame -->
             <div class="profile-frame">
                 <img src="https://lh3.googleusercontent.com/d/1-4uXX5j-VPNoJ-WThL8VH5190mSZB-jj" alt="Ahmed Mahmoud Mahgoub" class="profile-img">
             </div>
@@ -766,12 +933,12 @@
 
         <!-- Technical Skills Section -->
         <section id="skills">
-            <h2 class="section-title scroll-hidden">Technical Skills</h2>
+            <h2 class="section-title scroll-hidden" data-i18n="skills_title">Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-card scroll-hidden">
                     <div class="skill-icon"><i class="fa-solid fa-file-excel"></i></div>
-                    <div class="skill-title">Advanced Data Analysis & Excel</div>
-                    <p class="project-desc">Building reporting dashboards, advanced ETL cleaning, and Pivot Table modeling.</p>
+                    <div class="skill-title" data-i18n="skill_1_title">Advanced Data Analysis & Excel</div>
+                    <p class="project-desc" data-i18n="skill_1_desc">Building reporting dashboards, advanced ETL cleaning, and Pivot Table modeling.</p>
                     <div class="skill-tags">
                         <span class="tag">Microsoft Excel</span>
                         <span class="tag">Power Query</span>
@@ -782,8 +949,8 @@
 
                 <div class="skill-card scroll-hidden" style="transition-delay: 0.1s;">
                     <div class="skill-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                    <div class="skill-title">Business Intelligence & Dashboards</div>
-                    <p class="project-desc">Designing dynamic, interactive visual interfaces tailored for executive decision-makers.</p>
+                    <div class="skill-title" data-i18n="skill_2_title">Business Intelligence & Dashboards</div>
+                    <p class="project-desc" data-i18n="skill_2_desc">Designing dynamic, interactive visual interfaces tailored for executive decision-makers.</p>
                     <div class="skill-tags">
                         <span class="tag">Power BI</span>
                         <span class="tag">DAX Measures</span>
@@ -794,8 +961,8 @@
 
                 <div class="skill-card scroll-hidden" style="transition-delay: 0.2s;">
                     <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
-                    <div class="skill-title">Programming & Databases</div>
-                    <p class="project-desc">Large-scale data processing, querying relational databases, and algorithmic scripting.</p>
+                    <div class="skill-title" data-i18n="skill_3_title">Programming & Databases</div>
+                    <p class="project-desc" data-i18n="skill_3_desc">Large-scale data processing, querying relational databases, and algorithmic scripting.</p>
                     <div class="skill-tags">
                         <span class="tag">Python</span>
                         <span class="tag">Pandas</span>
@@ -808,44 +975,44 @@
 
         <!-- Featured Projects Section -->
         <section id="projects">
-            <h2 class="section-title scroll-hidden">Featured Projects</h2>
-            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: -1.5rem; margin-bottom: 1.5rem;">
+            <h2 class="section-title scroll-hidden" data-i18n="projects_title">Featured Projects</h2>
+            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: -1.5rem; margin-bottom: 1.5rem;" data-i18n="projects_info">
                 <i class="fa-solid fa-circle-info"></i> Click on any project card to view its full interactive dashboard, key metrics, and Google Drive files.
             </p>
 
             <div class="projects-grid">
-                <!-- Project 1: Excel Superstore 2019 Card -->
+                <!-- Project 1 -->
                 <div class="project-card scroll-hidden" onclick="openProjectModal('superstore')">
                     <div>
                         <div class="project-header">
                             <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore 2019" class="project-icon-img">
                             <div>
-                                <div class="project-card-title">Simple Superstore 2019</div>
+                                <div class="project-card-title" data-i18n="p1_title">Simple Superstore 2019</div>
                                 <span class="project-badge">Excel & Power Query</span>
                             </div>
                         </div>
-                        <p class="project-desc">Sales & Profit performance evaluation across product categories and regions for 2019.</p>
+                        <p class="project-desc" data-i18n="p1_desc">Sales & Profit performance evaluation across product categories and regions for 2019.</p>
                     </div>
                     <div class="project-card-footer">
-                        <span><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
+                        <span data-i18n="view_details"><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
 
-                <!-- Project 2: Power BI Central Region Card -->
+                <!-- Project 2 -->
                 <div class="project-card scroll-hidden" onclick="openProjectModal('central')" style="transition-delay: 0.1s;">
                     <div>
                         <div class="project-header">
                             <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="project-icon-img">
                             <div>
-                                <div class="project-card-title">Central Region Analysis</div>
+                                <div class="project-card-title" data-i18n="p2_title">Central Region Analysis</div>
                                 <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced</span>
                             </div>
                         </div>
-                        <p class="project-desc">In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.</p>
+                        <p class="project-desc" data-i18n="p2_desc">In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.</p>
                     </div>
                     <div class="project-card-footer">
-                        <span><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
+                        <span data-i18n="view_details"><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
@@ -854,39 +1021,37 @@
 
         <!-- Education & Certifications Section -->
         <section id="education">
-            <h2 class="section-title scroll-hidden">Education & Certifications</h2>
+            <h2 class="section-title scroll-hidden" data-i18n="edu_title">Education & Certifications</h2>
             
-            <!-- Academic Education Card -->
-            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">Academic Education</h3>
+            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;" data-i18n="academic_title">Academic Education</h3>
             <div class="certs-grid" style="margin-bottom: 3rem;">
                 <div class="cert-card scroll-hidden" style="cursor: default;">
                     <div>
                         <div class="cert-header">
-                            <!-- Dual Logo Setup: University Logo + Faculty Logo Branching Out -->
                             <div style="position: relative; display: inline-block;">
                                 <img src="https://lh3.googleusercontent.com/d/1UZedy9DY11Mr-t9pVzdVw-6Sml4B_0H2" alt="Damanhour University" class="cert-logo-img" style="width: 55px; height: 55px; object-fit: contain;">
-                                <img src="https://lh3.googleusercontent.com/d/11OP4lBelSsb4wryHner0CY2JdV0ug71V" alt="Faculty of Computers" style="width: 28px; height: 28px; object-fit: contain; position: absolute; bottom: -5px; right: -8px; background: white; border-radius: 50%; padding: 2px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                                <img src="https://lh3.googleusercontent.com/d/11OP4lBelSsb4wryHner0CY2JdV0ug71V" alt="Faculty of Computers" style="width: 28px; height: 28px; object-fit: contain; position: absolute; bottom: -5px; right: -8px; background: white; border-radius: 50%; padding: 2px; border: 1px solid var(--border-color);">
                             </div>
-                            <div style="margin-left: 0.5rem;">
-                                <div class="cert-title">Faculty of Computers and Information Technology</div>
-                                <div class="cert-issuer">Damanhour University</div>
+                            <div style="margin-left: 0.5rem; margin-right: 0.5rem;">
+                                <div class="cert-title" data-i18n="faculty_name">Faculty of Computers and Information Technology</div>
+                                <div class="cert-issuer" data-i18n="univ_name">Damanhour University</div>
                                 <div style="font-size: 0.85rem; color: var(--accent-color); font-weight: 700; margin-top: 0.2rem;">
                                     <i class="fa-regular fa-calendar-days"></i> 2025 - 2029
                                 </div>
                             </div>
                         </div>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Studying Computer Science, Software Engineering, Data Structures, Algorithms, and System Architecture.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="faculty_desc">Studying Computer Science, Software Engineering, Data Structures, Algorithms, and System Architecture.</p>
                     </div>
                     <div>
-                        <span class="cert-badge-loading">
+                        <span class="cert-badge-loading" data-i18n="studying_status">
                             <i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> Currently Studying / In Progress
                         </span>
                     </div>
                 </div>
             </div>
 
-            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem;">Certifications & Training Programs</h3>
-            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.</p>
+            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem;" data-i18n="certs_title">Certifications & Training Programs</h3>
+            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;" data-i18n="certs_info"><i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.</p>
             
             <div class="certs-grid">
                 <!-- DEPI Card -->
@@ -895,14 +1060,14 @@
                         <div class="cert-header">
                             <img src="https://lh3.googleusercontent.com/d/1h-Ldx0r2fkcigeHuxJI0WH7AtYAT23Pt" alt="DEPI Logo" class="cert-logo-img">
                             <div>
-                                <div class="cert-title">Digital Egypt Pioneers Initiative (DEPI)</div>
-                                <div class="cert-issuer">Ministry of Communications (MCIT)</div>
+                                <div class="cert-title" data-i18n="depi_title">Digital Egypt Pioneers Initiative (DEPI)</div>
+                                <div class="cert-issuer" data-i18n="mcit_title">Ministry of Communications (MCIT)</div>
                             </div>
                         </div>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Data Analytics Track covering Power BI, Power Query, SQL, and Python.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="depi_desc">Data Analytics Track covering Power BI, Power Query, SQL, and Python.</p>
                     </div>
                     <div>
-                        <span class="cert-badge-loading">
+                        <span class="cert-badge-loading" data-i18n="in_progress">
                             <i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> In Progress
                         </span>
                     </div>
@@ -918,10 +1083,10 @@
                                 <div class="cert-issuer">IBM SkillsBuild</div>
                             </div>
                         </div>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Issued on: Aug 22, 2026 | Verified Official Certificate Document</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="ibm_desc">Issued on: Aug 22, 2026 | Verified Official Certificate Document</p>
                     </div>
                     <div>
-                        <span class="cert-badge-completed"><i class="fa-solid fa-image"></i> View Official Certificate</span>
+                        <span class="cert-badge-completed" data-i18n="view_cert"><i class="fa-solid fa-image"></i> View Official Certificate</span>
                     </div>
                 </div>
 
@@ -935,10 +1100,10 @@
                                 <div class="cert-issuer">Oracle</div>
                             </div>
                         </div>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Advanced Training Program on AI Fundamentals & Applications by Oracle.</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="oracle_desc">Advanced Training Program on AI Fundamentals & Applications by Oracle.</p>
                     </div>
                     <div>
-                        <span class="cert-badge-completed"><i class="fa-solid fa-image"></i> View Official Certificate Photo</span>
+                        <span class="cert-badge-completed" data-i18n="view_cert"><i class="fa-solid fa-image"></i> View Official Certificate Photo</span>
                     </div>
                 </div>
             </div>
@@ -946,26 +1111,26 @@
 
         <!-- Contact Us Section -->
         <section id="contact-us" class="scroll-hidden">
-            <h2 class="section-title">Contact Me</h2>
+            <h2 class="section-title" data-i18n="contact_title">Contact Me</h2>
             <div class="contact-form-container">
                 <form action="https://formspree.io/f/xljdryzr" method="POST">
                     <div class="form-group">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                        <label class="form-label" data-i18n="form_name">Full Name</label>
+                        <input type="text" name="name" class="form-input" data-i18n-ph="ph_name" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
+                        <label class="form-label" data-i18n="form_email">Email Address</label>
+                        <input type="email" name="email" class="form-input" data-i18n-ph="ph_email" placeholder="you@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Phone Number</label>
+                        <label class="form-label" data-i18n="form_phone">Phone Number</label>
                         <input type="tel" name="phone" class="form-input" placeholder="+20 100 000 0000">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" rows="5" class="form-input" placeholder="How can I help you?" required></textarea>
+                        <label class="form-label" data-i18n="form_message">Message</label>
+                        <textarea name="message" rows="5" class="form-input" data-i18n-ph="ph_message" placeholder="How can I help you?" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-gmail" style="width: 100%; justify-content: center; font-size: 1.05rem;">
+                    <button type="submit" class="btn btn-gmail" style="width: 100%; justify-content: center; font-size: 1.05rem;" data-i18n="btn_send">
                         <i class="fa-solid fa-paper-plane"></i> Send Message
                     </button>
                 </form>
@@ -1000,68 +1165,258 @@
                 <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://github.com/AhmedMahgoub2007" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <!-- روابط منصات العمل الحر باللوجوهات المخصصة -->
                 <a href="https://www.upwork.com/freelancers/~010a58d156da706d2c" target="_blank" title="Upwork"><img src="https://lh3.googleusercontent.com/d/1uGY9ZnGU3pVFBnXXOSc1uEusqkGMkLEy" alt="Upwork" class="footer-custom-icon"></a>
                 <a href="https://mostaql.com/u/Ahmed__Mahgoub" target="_blank" title="مستقل"><img src="https://lh3.googleusercontent.com/d/1BkyrZD2X0zDlNeMn0ehyoHKfefh131E7" alt="مستقل" class="footer-custom-icon"></a>
                 <a href="https://www.freelancer.com/u/AhmedMahoub" target="_blank" title="Freelancer"><img src="https://lh3.googleusercontent.com/d/1ySQXcJwAEPQVuT87QthpuLPjgoB61mze" alt="Freelancer" class="footer-custom-icon"></a>
                 <a href="https://khamsat.com/user/ahmed_mahgoub1897" target="_blank" title="خمسات"><img src="https://lh3.googleusercontent.com/d/1ovfgIQhqh_vzIk_4GTboj0hs35GvvGs8" alt="خمسات" class="footer-custom-icon"></a>
             </div>
-            <p class="footer-copy">All Rights Reserved © 2026 - Ahmed Mahmoud Mahgoub</p>
+            <p class="footer-copy" data-i18n="footer_copy">All Rights Reserved © 2026 - Ahmed Mahmoud Mahgoub</p>
         </div>
     </footer>
 
+    <!-- Main Features & Translation Script -->
     <script>
-        // --- 1. Intro Screen Logic ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const introScreen = document.getElementById('intro-screen');
-                introScreen.classList.add('slide-up');
-                setTimeout(() => {
-                    introScreen.style.display = 'none';
-                }, 1000); 
-            }, 2000);
-        });
-
-        // --- 2. Mobile Menu Toggle Logic ---
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-        
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = mobileMenu.querySelector('i');
-            
-            if(navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+        // Safe LocalStorage Helper Functions
+        function getSafeStorage(key, fallback) {
+            try {
+                return localStorage.getItem(key) || fallback;
+            } catch (e) {
+                return fallback;
             }
-        });
+        }
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const icon = mobileMenu.querySelector('i');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            });
-        });
+        function setSafeStorage(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch (e) {}
+        }
 
-        // --- 3. Typewriter Effect Logic ---
-        const typeWords = [
-            "Junior Data Analyst", 
-            "Excel & Power Query Expert", 
-            "Power BI Developer", 
-            "Python Programmer"
-        ];
+        // --- Global Variables ---
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
 
+        // --- Translations Dictionary ---
+        const translations = {
+            en: {
+                name: "Ahmed Mahmoud Mahgoub",
+                nav_about: "About",
+                nav_skills: "Skills",
+                nav_projects: "Projects",
+                nav_education: "Education & Certs",
+                nav_contact: "Contact",
+                location: "Beheira, Egypt",
+                hero_desc: "My tech journey started with a curiosity to understand how systems and algorithms operate, leading me to study Computer Science at Damanhour University and complete Harvard's CS50. That passion quickly evolved from writing code to making data speak—believing every dataset holds a story waiting to be uncovered. Currently, as a Data Analytics trainee in the Digital Egypt Pioneers Initiative (DEPI), I transform raw, complex data into dynamic dashboards and compelling visual stories that guide strategic decisions.",
+                btn_cv: '<i class="fa-solid fa-file-lines"></i> View / Download CV',
+                btn_contact: '<i class="fa-solid fa-paper-plane"></i> Get In Touch',
+                skills_title: "Technical Skills",
+                skill_1_title: "Advanced Data Analysis & Excel",
+                skill_1_desc: "Building reporting dashboards, advanced ETL cleaning, and Pivot Table modeling.",
+                skill_2_title: "Business Intelligence & Dashboards",
+                skill_2_desc: "Designing dynamic, interactive visual interfaces tailored for executive decision-makers.",
+                skill_3_title: "Programming & Databases",
+                skill_3_desc: "Large-scale data processing, querying relational databases, and algorithmic scripting.",
+                projects_title: "Featured Projects",
+                projects_info: '<i class="fa-solid fa-circle-info"></i> Click on any project card to view its full interactive dashboard, key metrics, and Google Drive files.',
+                p1_title: "Simple Superstore 2019",
+                p1_desc: "Sales & Profit performance evaluation across product categories and regions for 2019.",
+                p2_title: "Central Region Analysis",
+                p2_desc: "In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.",
+                view_details: '<i class="fa-solid fa-folder-open"></i> View Details & Drive Link',
+                edu_title: "Education & Certifications",
+                academic_title: "Academic Education",
+                faculty_name: "Faculty of Computers and Information Technology",
+                univ_name: "Damanhour University",
+                faculty_desc: "Studying Computer Science, Software Engineering, Data Structures, Algorithms, and System Architecture.",
+                studying_status: '<i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> Currently Studying / In Progress',
+                certs_title: "Certifications & Training Programs",
+                certs_info: '<i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.',
+                depi_title: "Digital Egypt Pioneers Initiative (DEPI)",
+                mcit_title: "Ministry of Communications (MCIT)",
+                depi_desc: "Data Analytics Track covering Power BI, Power Query, SQL, and Python.",
+                in_progress: '<i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> In Progress',
+                ibm_desc: "Issued on: Aug 22, 2026 | Verified Official Certificate Document",
+                oracle_desc: "Advanced Training Program on AI Fundamentals & Applications by Oracle.",
+                view_cert: '<i class="fa-solid fa-image"></i> View Official Certificate',
+                contact_title: "Contact Me",
+                form_name: "Full Name",
+                form_email: "Email Address",
+                form_phone: "Phone Number",
+                form_message: "Message",
+                ph_name: "Your Name",
+                ph_email: "you@example.com",
+                ph_message: "How can I help you?",
+                btn_send: '<i class="fa-solid fa-paper-plane"></i> Send Message',
+                footer_copy: "All Rights Reserved © 2026 - Ahmed Mahmoud Mahgoub",
+                typeWords: ["Junior Data Analyst", "Excel & Power Query Expert", "Power BI Developer", "Python Programmer"]
+            },
+            ar: {
+                name: "أحمد محمود محجوب",
+                nav_about: "عنّي",
+                nav_skills: "المهارات",
+                nav_projects: "المشاريع",
+                nav_education: "التعليم والشهادات",
+                nav_contact: "تواصل معي",
+                location: "البحيرة، مصر",
+                hero_desc: "بدأت رحلتي التقنية بفضول لمعرفة كيفية عمل الأنظمة والخوارزميات، مما قادني لدراسة علوم الحاسب بجامعة دمنهور وإتمام دورة CS50 من هارفارد. سرعان ما تطور هذا الشغف من مجرد كتابة الكود إلى إعطاء صوت للبيانات — إيماناً مني بأن كل مجموعة بيانات تحمل قصة تنتظر من يكتشفها. حالياً، كمتدرب تحليل بيانات في مبادرة رواد مصر الرقمية (DEPI)، أقوم بتحويل البيانات الخام المعقدة إلى لوحات تحكم تفاعلية وقصص بصرية تلهم القرارات الاستراتيجية.",
+                btn_cv: '<i class="fa-solid fa-file-lines"></i> عرض / تحميل الـ CV',
+                btn_contact: '<i class="fa-solid fa-paper-plane"></i> تواصل معي',
+                skills_title: "المهارات التقنية",
+                skill_1_title: "تحليل البيانات المتقدم والإكسيل",
+                skill_1_desc: "بناء لوحات التقارير، تنظيف البيانات المعقدة بـ Power Query، ونمذجة Pivot Tables.",
+                skill_2_title: "ذكاء الأعمال ولوحات التحكم (BI)",
+                skill_2_desc: "تصميم واجهات بصرية تفاعلية وديناميكية مخصصة لصناع القرار التنفيذيين.",
+                skill_3_title: "البرمجة وقواعد البيانات",
+                skill_3_desc: "معالجة البيانات ضخمة الحجم، الاستعلام من قواعد البيانات العلائقية، وكتابة السكريبتات البرمجية.",
+                projects_title: "المشاريع المميزة",
+                projects_info: '<i class="fa-solid fa-circle-info"></i> اضغط على أي مشروع لعرض لوحة التحكم التفاعلية والملفات على Google Drive.',
+                p1_title: "تحليل مبيعات متجر Superstore 2019",
+                p1_desc: "تقييم أداء المبيعات والأرباح عبر فئات المنتجات والمناطق الجغرافية لعام 2019.",
+                p2_title: "تحليل المنطقة المركزية (Central Region)",
+                p2_desc: "دراسة إقليمية متعمقة لتقييم الفئات الخاسرة، الخصومات، وسلوكيات العملاء.",
+                view_details: '<i class="fa-solid fa-folder-open"></i> عرض التفاصيل ورابط Drive',
+                edu_title: "التعليم والشهادات",
+                academic_title: "التعليم الأكاديمي",
+                faculty_name: "كلية الحاسبات والمعلومات والذكاء الاصطناعي",
+                univ_name: "جامعة دمنهور",
+                faculty_desc: "دراسة علوم الحاسب، هندسة البرمجيات، هيكلة البيانات، الخوارزميات، وهندسة الأنظمة.",
+                studying_status: '<i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> أدرس حالياً',
+                certs_title: "الشهادات والبرامج التدريبية",
+                certs_info: '<i class="fa-solid fa-circle-info"></i> اضغط على أي شهادة لعرض الوثيقة أو الشارة الرسمية.',
+                depi_title: "مبادرة رواد مصر الرقمية (DEPI)",
+                mcit_title: "وزارة الاتصالات وتكنولوجيا المعلومات",
+                depi_desc: "مسار تحليل البيانات شاملاً Power BI، Power Query، SQL، و Python.",
+                in_progress: '<i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> قيد التدريب',
+                ibm_desc: "تاريخ الإصدار: 22 أغسطس 2026 | وثيقة شهادة رسمية معتمدة",
+                oracle_desc: "برنامج تدريبي متقدم في أساسيات وتطبيقات الذكاء الاصطناعي من Oracle.",
+                view_cert: '<i class="fa-solid fa-image"></i> عرض الشهادة الرسمية',
+                contact_title: "تواصل معي",
+                form_name: "الاسم الكامل",
+                form_email: "البريد الإلكتروني",
+                form_phone: "رقم الهاتف",
+                form_message: "الرسالة",
+                ph_name: "اسمك الكريم",
+                ph_email: "you@example.com",
+                ph_message: "كيف يمكنني مساعدتك؟",
+                btn_send: '<i class="fa-solid fa-paper-plane"></i> إرسال الرسالة',
+                footer_copy: "جميع الحقوق محفوظة © 2026 - أحمد محمود محجوب",
+                typeWords: ["محلل بيانات مبتدئ", "خبير Excel & Power Query", "مطوّر Power BI", "مبرمج Python"]
+            }
+        };
+
+        let currentLang = getSafeStorage('lang', 'en');
+        let currentTypeWords = translations[currentLang] ? translations[currentLang].typeWords : translations.en.typeWords;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            setSafeStorage('lang', lang);
+            document.documentElement.setAttribute('lang', lang);
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            
+            const langText = document.getElementById('lang-text');
+            if (langText) langText.textContent = lang === 'ar' ? 'EN' : 'AR';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            if (translations[lang] && translations[lang].typeWords) {
+                currentTypeWords = translations[lang].typeWords;
+            }
+            // إعادة ضبط المؤشرات بأمان عند تغيير اللغة دون كسر اللوب
+            wordIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+        }
+
+        const langToggleBtn = document.getElementById('lang-toggle');
+        if (langToggleBtn) {
+            langToggleBtn.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'ar' : 'en');
+            });
+        }
+
+        // --- Theme Switcher Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            setSafeStorage('theme', theme);
+            if (themeIcon) {
+                if (theme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            }
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+        }
+
+        const savedTheme = getSafeStorage('theme', 'light');
+        setTheme(savedTheme);
+        setLanguage(currentLang);
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                if(navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenu.querySelector('i');
+                    if(icon) {
+                        icon.classList.remove('fa-xmark');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+        }
+
+        // --- Fixed Infinite Typewriter Effect ---
         function typeEffect() {
-            const currentWord = typeWords[wordIndex];
+            if (!currentTypeWords || !currentTypeWords.length) {
+                setTimeout(typeEffect, 500);
+                return;
+            }
+
+            const currentWord = currentTypeWords[wordIndex % currentTypeWords.length];
             const typeSpan = document.getElementById("typewriter");
+            if (!typeSpan) {
+                setTimeout(typeEffect, 500);
+                return;
+            }
             
             if (isDeleting) {
                 typeSpan.textContent = currentWord.substring(0, charIndex - 1);
@@ -1071,96 +1426,143 @@
                 charIndex++;
             }
 
-            let typeSpeed = isDeleting ? 50 : 100;
+            let typeSpeed = isDeleting ? 40 : 90;
 
             if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000;
+                typeSpeed = 2000; // وقت التوقف بعد اكتمال الكلمة
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
-                wordIndex = (wordIndex + 1) % typeWords.length;
+                wordIndex++; // الانتقال بسلاسة للكلمة التالية دون أي توقف نهائي
                 typeSpeed = 500;
             }
 
             setTimeout(typeEffect, typeSpeed);
         }
         
-        document.addEventListener("DOMContentLoaded", () => {
-            if(typeWords.length) setTimeout(typeEffect, 2500);
-        });
+        setTimeout(typeEffect, 1000);
 
-        // --- 4. Scroll Animations Logic ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('scroll-show');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+        // --- Interactive Scroll Animations ---
+        function setupScrollObserver() {
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('scroll-show');
+                        }
+                    });
+                }, { threshold: 0.1 });
 
-        const hiddenElements = document.querySelectorAll('.scroll-hidden');
-        hiddenElements.forEach((el) => observer.observe(el));
+                document.querySelectorAll('.scroll-hidden').forEach((el) => observer.observe(el));
+            } else {
+                document.querySelectorAll('.scroll-hidden').forEach((el) => el.classList.add('scroll-show'));
+            }
+        }
 
-        // Original Modal Functions
+        setupScrollObserver();
+
+        // Modals Dynamic Content
         function openProjectModal(project) {
             const content = document.getElementById('projectModalContent');
             if (project === 'superstore') {
-                content.innerHTML = `
+                content.innerHTML = currentLang === 'ar' ? `
                     <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                        <span class="project-badge">Excel & Power Query Project</span>
+                        <span class="project-badge">مشروع Excel & Power Query</span>
                     </div>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.8rem;">
-                        Simple Superstore 2019 - Sales & Profit Analysis
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        تحليل مبيعات وأرباح متجر Superstore 2019
                     </h2>
-                    <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.2rem;">
-                        A comprehensive analytical project evaluating financial performance and profit drivers across product categories and geographical regions for Superstore 2019.
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        مشروع تحليلي شامل لتقييم الأداء المالي ومحركات الأرباح عبر فئات المنتجات والمناطق الجغرافية المختلفة لعام 2019.
                     </p>
-
                     <div style="text-align: center; margin-bottom: 1.5rem;">
                         <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Dashboard" class="modal-img">
                     </div>
-
-                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
-                    <ul style="list-style: disc; margin-left: 1.5rem; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
+                    <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>تنظيف البيانات ومعالجة المرتجعات باستخدام تحويلات <strong>Power Query</strong>.</li>
+                        <li>بناء نموذج بيانات متكامل وحساب صافي المبيعات والأرباح باستخدام <strong>Power Pivot & DAX</strong>.</li>
+                        <li>تقسيم المبيعات عبر المناطق (الغرب، الشرق، الوسط، والجنوب) لتحديد الولايات الأكثر ربحية.</li>
+                        <li>تصميم لوحة تحكم تفاعلية لمتابعة اتجاهات المبيعات والأرباح شهرياً.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/drive/folders/1TTJddObN1tGQiEfHaBExZtF72GYhnBML?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-folder-open"></i> فتح ملفات المشروع على Google Drive
+                        </a>
+                    </div>
+                ` : `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge">Excel & Power Query Project</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        Simple Superstore 2019 - Sales & Profit Analysis
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        A comprehensive analytical project evaluating financial performance and profit drivers across product categories and geographical regions for Superstore 2019.
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Dashboard" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
                         <li>Cleaned data and handled returned orders using <strong>Power Query</strong> ETL transformations.</li>
                         <li>Engineered an integrated data model and calculated net sales & profit with <strong>Power Pivot & DAX</strong>.</li>
                         <li>Segmented sales across West, East, Central, and South regions to highlight top-performing states.</li>
                         <li>Designed an interactive <strong>Sales & Profit Performance Dashboard</strong> tracking monthly trends.</li>
                     </ul>
-
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <div style="margin-top: 1.5rem;">
                         <a href="https://drive.google.com/drive/folders/1TTJddObN1tGQiEfHaBExZtF72GYhnBML?usp=drive_link" target="_blank" class="btn btn-gmail">
                             <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
                         </a>
                     </div>
                 `;
             } else if (project === 'central') {
-                content.innerHTML = `
+                content.innerHTML = currentLang === 'ar' ? `
                     <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced Analytics</span>
+                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">تحليلات Power BI متقدمة</span>
                     </div>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.8rem;">
-                        Central Region Sales & Profit Analysis
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        تحليل أداء ومبيعات المنطقة المركزية (Central Region)
                     </h2>
-                    <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.2rem;">
-                        In-depth performance study focused on the Central Region, identifying key loss-making categories, customer behavior, and shipping mode impacts on profit margins.
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        دراسة متعمقة للمنطقة المركزية لتحديد الفئات المسببة للخسائر، وتأثير الخصومات وسلوك العملاء على هامش الربح.
                     </p>
-
                     <div style="text-align: center; margin-bottom: 1.5rem;">
                         <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="modal-img">
                     </div>
-
-                    <h4 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
-                    <ul style="list-style: disc; margin-left: 1.5rem; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
+                    <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>إجراء عمليات تنظيف وتحويل بيانات متقدمة بواسطة <strong>Power Query</strong>.</li>
+                        <li>تصنيف المنتجات إلى قطاعات رابحة وخاسرة عبر مختلف الفئات.</li>
+                        <li>تحليل مبيعات العملاء وسائل الشحن وتأثير نسبة الخصومات على الأرباح.</li>
+                        <li>تطوير لوحة تحكم تفاعلية متكاملة في <strong>Power BI</strong>.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/drive/folders/1WRKzEuzmsRUiKAx9uKJ3XK9mjxcoj4eV?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-folder-open"></i> فتح ملفات المشروع على Google Drive
+                        </a>
+                    </div>
+                ` : `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced Analytics</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        Central Region Sales & Profit Analysis
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        In-depth performance study focused on the Central Region, identifying key loss-making categories, customer behavior, and shipping mode impacts on profit margins.
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
                         <li>Executed extensive data cleaning and data type casting via <strong>Power Query</strong>.</li>
                         <li>Classified products into Profitable vs. Loss-making segments across various categories.</li>
                         <li>Analyzed sales distribution by customer, ship mode, and discount impacts on overall profit margin.</li>
                         <li>Delivered an interactive multi-page <strong>Power BI Dashboard</strong> with dynamic segment filtering.</li>
                     </ul>
-
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <div style="margin-top: 1.5rem;">
                         <a href="https://drive.google.com/drive/folders/1WRKzEuzmsRUiKAx9uKJ3XK9mjxcoj4eV?usp=drive_link" target="_blank" class="btn btn-gmail">
                             <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
                         </a>
@@ -1174,7 +1576,7 @@
             const content = document.getElementById('certModalContent');
             if(type === 'ibm') {
                 content.innerHTML = `
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" style="height: 24px;"> IBM Data Fundamentals Certificate
                     </h3>
                     <div style="text-align: center;">
@@ -1183,12 +1585,11 @@
                 `;
             } else if(type === 'oracle') {
                 content.innerHTML = `
-                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" style="height: 20px;"> Oracle AI for You Certificate
                     </h3>
-                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1rem;">Official Certificate Document issued by Oracle.</p>
                     <div style="text-align: center;">
-                        <img src="https://lh3.googleusercontent.com/d/1f8TNf2ox1wnUmXMJYwR77M7vLbSlq1-w" alt="Oracle Certificate Photo" class="modal-img" style="border: 1px solid #e2e8f0;">
+                        <img src="https://lh3.googleusercontent.com/d/1f8TNf2ox1wnUmXMJYwR77M7vLbSlq1-w" alt="Oracle Certificate Photo" class="modal-img">
                     </div>
                     <div style="text-align: center; margin-top: 1.5rem;">
                         <a href="https://drive.google.com/file/d/1f8TNf2ox1wnUmXMJYwR77M7vLbSlq1-w/view?usp=drive_link" target="_blank" class="btn btn-gmail"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Original Image in Drive</a>
@@ -1198,11 +1599,11 @@
                 content.innerHTML = `
                     <div style="padding: 1.5rem; text-align: center;">
                         <img src="https://lh3.googleusercontent.com/d/1h-Ldx0r2fkcigeHuxJI0WH7AtYAT23Pt" style="height: 90px; margin-bottom: 1rem; object-fit: contain;">
-                        <h2 style="color: #0f172a; font-weight: 800; font-size: 1.5rem;">Digital Egypt Pioneers Initiative (DEPI)</h2>
-                        <p style="color: #64748b; font-weight: 700; margin-top: 0.3rem;">Ministry of Communications and Information Technology (MCIT)</p>
-                        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid #e2e8f0;">
-                        <h4 style="color: #0f172a; font-size: 1.1rem; font-weight: 700;">Data Analytics Track</h4>
-                        <p style="color: #475569; font-size: 0.95rem; margin-top: 0.5rem;">
+                        <h2 style="font-weight: 800; font-size: 1.5rem;">Digital Egypt Pioneers Initiative (DEPI)</h2>
+                        <p style="color: var(--text-muted); font-weight: 700; margin-top: 0.3rem;">Ministry of Communications and Information Technology (MCIT)</p>
+                        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--border-color);">
+                        <h4 style="font-size: 1.1rem; font-weight: 700;">Data Analytics Track</h4>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: var(--text-muted);">
                             Covering Power BI, Power Query, Advanced Excel, SQL, and Python Data Analysis.
                         </p>
                         <div style="margin-top: 1.5rem;" class="cert-badge-loading">
@@ -1215,7 +1616,8 @@
         }
 
         function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
         }
 
         window.onclick = function(event) {
