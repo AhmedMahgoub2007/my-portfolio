@@ -34,6 +34,76 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* --- Intro Screen Styles --- */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+        }
+        
+        #intro-screen.slide-up {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            animation: bounce 1.5s infinite;
+        }
+
+        .intro-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- Scroll Animation Styles --- */
+        .scroll-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .scroll-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Typewriter Cursor Style --- */
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent-color);
+            margin-left: 2px;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* -------------------------------- */
+
         body {
             background-color: var(--bg-light);
             color: var(--text-main);
@@ -92,6 +162,46 @@
 
         .nav-links a:hover {
             color: var(--accent-color);
+        }
+
+        /* --- Mobile Menu Toggle --- */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Responsive Design for Navbar */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .logo-name-text {
+                font-size: 1.2rem;
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .nav-links a {
+                font-size: 1.1rem;
+            }
         }
 
         .container {
@@ -153,6 +263,8 @@
             color: var(--accent-color);
             font-weight: 700;
             margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
         }
 
         .hero-location {
@@ -213,6 +325,27 @@
 
         .btn-github { background-color: #24292e; color: white; }
         .btn-github:hover { background-color: #000000; transform: translateY(-2px); color: white; }
+
+        /* Freelance Custom Buttons */
+        .btn-upwork { background-color: #14a800; color: white; }
+        .btn-upwork:hover { background-color: #118d00; transform: translateY(-2px); color: white; }
+
+        .btn-mostaql { background-color: #1d71b8; color: white; }
+        .btn-mostaql:hover { background-color: #165891; transform: translateY(-2px); color: white; }
+
+        .btn-freelancer { background-color: #29b2fe; color: white; }
+        .btn-freelancer:hover { background-color: #119be8; transform: translateY(-2px); color: white; }
+
+        .btn-khamsat { background-color: #ff9900; color: white; }
+        .btn-khamsat:hover { background-color: #e08700; transform: translateY(-2px); color: white; }
+
+        .btn-platform-img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
 
         section {
             padding: 5rem 0;
@@ -342,7 +475,7 @@
             color: var(--accent-color);
         }
 
-        /* Certifications */
+        /* Certifications & Education */
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -474,7 +607,7 @@
         .modal-close:hover { background: #e2e8f0; color: var(--primary-color); }
         .modal-img { width: 100%; border-radius: 8px; box-shadow: var(--shadow-md); margin-top: 1rem; max-height: 65vh; object-fit: contain; background: #f8fafc; }
 
-        /* Footer without underlines */
+        /* Footer */
         footer { background: var(--primary-color); color: white; padding: 3rem 0 1.5rem; text-align: center; }
         .footer-socials { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .footer-socials a { 
@@ -491,10 +624,22 @@
             text-decoration: none;
         }
         .footer-socials a:hover { color: white; background: var(--accent-color); transform: translateY(-3px); text-decoration: none; }
+        .footer-custom-icon {
+            width: 28px; /* تم التكبير من 22px ليصبح أكثر تناسقاً */
+            height: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
         .footer-copy { font-size: 0.85rem; color: #94a3b8; }
     </style>
 </head>
 <body>
+
+    <!-- Intro Screen -->
+    <div id="intro-screen">
+        <i class="fa-solid fa-chart-line logo-chart-icon intro-icon"></i>
+        <h1 class="intro-name">Ahmed Mahmoud Mahgoub</h1>
+    </div>
 
     <!-- Navigation Bar -->
     <nav>
@@ -502,7 +647,11 @@
             <i class="fa-solid fa-chart-line logo-chart-icon"></i>
             <span class="logo-name-text">Ahmed Mahmoud Mahgoub</span>
         </a>
-        <ul class="nav-links">
+        <!-- Mobile Hamburger Icon -->
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -513,10 +662,12 @@
 
     <div class="container">
         <!-- Hero Section -->
-        <section id="about" class="hero-section">
+        <section id="about" class="hero-section scroll-hidden">
             <div class="hero-text">
                 <h1 class="hero-title">Ahmed Mahmoud Mahgoub</h1>
-                <div class="hero-subtitle">Junior Data Analyst</div>
+                <div class="hero-subtitle">
+                    <span id="typewriter"></span><span class="type-cursor">&nbsp;</span>
+                </div>
                 
                 <!-- Location Tag -->
                 <div class="hero-location">
@@ -537,6 +688,11 @@
                     <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" class="btn btn-facebook"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" class="btn btn-tiktok"><i class="fa-brands fa-tiktok"></i></a>
                     <a href="https://github.com/AhmedMahgoub2007" target="_blank" class="btn btn-github"><i class="fa-brands fa-github"></i></a>
+                    <!-- Freelance Platform Buttons -->
+                    <a href="https://www.upwork.com/freelancers/~010a58d156da706d2c" target="_blank" class="btn btn-upwork" title="Upwork"><img src="https://lh3.googleusercontent.com/d/15qHU4FZQaapHKPHbo7genTKEXlWgqApp" alt="Upwork" class="btn-platform-img"> Upwork</a>
+                    <a href="https://mostaql.com/u/Ahmed__Mahgoub" target="_blank" class="btn btn-mostaql" title="مستقل"><img src="https://lh3.googleusercontent.com/d/19zTlPTZNASxigPtEukCJELykyGLTtfeo" alt="مستقل" class="btn-platform-img"> Mostaql</a>
+                    <a href="https://www.freelancer.com/u/AhmedMahoub" target="_blank" class="btn btn-freelancer" title="Freelancer"><img src="https://lh3.googleusercontent.com/d/1msTD7V9BrFrgSndQZ52i-gNhDkouz2J0" alt="Freelancer" class="btn-platform-img"> Freelancer</a>
+                    <a href="https://khamsat.com/user/ahmed_mahgoub1897" target="_blank" class="btn btn-khamsat" title="خمسات"><img src="https://lh3.googleusercontent.com/d/1nIjkaBalX9W8FGTMrkDqzdQsARooOze4" alt="خمسات" class="btn-platform-img"> Khamsat</a>
                 </div>
             </div>
 
@@ -548,9 +704,9 @@
 
         <!-- Technical Skills Section -->
         <section id="skills">
-            <h2 class="section-title">Technical Skills</h2>
+            <h2 class="section-title scroll-hidden">Technical Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card">
+                <div class="skill-card scroll-hidden">
                     <div class="skill-icon"><i class="fa-solid fa-file-excel"></i></div>
                     <div class="skill-title">Advanced Data Analysis & Excel</div>
                     <p class="project-desc">Building reporting dashboards, advanced ETL cleaning, and Pivot Table modeling.</p>
@@ -562,7 +718,7 @@
                     </div>
                 </div>
 
-                <div class="skill-card">
+                <div class="skill-card scroll-hidden" style="transition-delay: 0.1s;">
                     <div class="skill-icon"><i class="fa-solid fa-chart-pie"></i></div>
                     <div class="skill-title">Business Intelligence & Dashboards</div>
                     <p class="project-desc">Designing dynamic, interactive visual interfaces tailored for executive decision-makers.</p>
@@ -574,7 +730,7 @@
                     </div>
                 </div>
 
-                <div class="skill-card">
+                <div class="skill-card scroll-hidden" style="transition-delay: 0.2s;">
                     <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
                     <div class="skill-title">Programming & Databases</div>
                     <p class="project-desc">Large-scale data processing, querying relational databases, and algorithmic scripting.</p>
@@ -590,14 +746,14 @@
 
         <!-- Featured Projects Section -->
         <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: -1.5rem; margin-bottom: 1.5rem;">
+            <h2 class="section-title scroll-hidden">Featured Projects</h2>
+            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-top: -1.5rem; margin-bottom: 1.5rem;">
                 <i class="fa-solid fa-circle-info"></i> Click on any project card to view its full interactive dashboard, key metrics, and Google Drive files.
             </p>
 
             <div class="projects-grid">
                 <!-- Project 1: Excel Superstore 2019 Card -->
-                <div class="project-card" onclick="openProjectModal('superstore')">
+                <div class="project-card scroll-hidden" onclick="openProjectModal('superstore')">
                     <div>
                         <div class="project-header">
                             <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore 2019" class="project-icon-img">
@@ -615,7 +771,7 @@
                 </div>
 
                 <!-- Project 2: Power BI Central Region Card -->
-                <div class="project-card" onclick="openProjectModal('central')">
+                <div class="project-card scroll-hidden" onclick="openProjectModal('central')" style="transition-delay: 0.1s;">
                     <div>
                         <div class="project-header">
                             <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="project-icon-img">
@@ -636,14 +792,43 @@
 
         <!-- Education & Certifications Section -->
         <section id="education">
-            <h2 class="section-title">Education & Certifications</h2>
+            <h2 class="section-title scroll-hidden">Education & Certifications</h2>
             
-            <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem;">Certifications & Training Programs</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.</p>
+            <!-- Academic Education Card -->
+            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">Academic Education</h3>
+            <div class="certs-grid" style="margin-bottom: 3rem;">
+                <div class="cert-card scroll-hidden" style="cursor: default;">
+                    <div>
+                        <div class="cert-header">
+                            <!-- Dual Logo Setup: University Logo + Faculty Logo Branching Out -->
+                            <div style="position: relative; display: inline-block;">
+                                <img src="https://lh3.googleusercontent.com/d/1UZedy9DY11Mr-t9pVzdVw-6Sml4B_0H2" alt="Damanhour University" class="cert-logo-img" style="width: 55px; height: 55px; object-fit: contain;">
+                                <img src="https://lh3.googleusercontent.com/d/11OP4lBelSsb4wryHner0CY2JdV0ug71V" alt="Faculty of Computers" style="width: 28px; height: 28px; object-fit: contain; position: absolute; bottom: -5px; right: -8px; background: white; border-radius: 50%; padding: 2px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                            </div>
+                            <div style="margin-left: 0.5rem;">
+                                <div class="cert-title">Faculty of Computers and Information Technology</div>
+                                <div class="cert-issuer">Damanhour University</div>
+                                <div style="font-size: 0.85rem; color: var(--accent-color); font-weight: 700; margin-top: 0.2rem;">
+                                    <i class="fa-regular fa-calendar-days"></i> 2025 - 2029
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Studying Computer Science, Software Engineering, Data Structures, Algorithms, and System Architecture.</p>
+                    </div>
+                    <div>
+                        <span class="cert-badge-loading">
+                            <i class="fa-solid fa-spinner fa-spin" style="color: #16a34a;"></i> Currently Studying / In Progress
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="scroll-hidden" style="font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1.5rem;">Certifications & Training Programs</h3>
+            <p class="scroll-hidden" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-info"></i> Click on any certification card below to view its official certificate document or badge.</p>
             
             <div class="certs-grid">
                 <!-- DEPI Card -->
-                <div class="cert-card" onclick="openCertModal('depi')">
+                <div class="cert-card scroll-hidden" onclick="openCertModal('depi')">
                     <div>
                         <div class="cert-header">
                             <img src="https://lh3.googleusercontent.com/d/1h-Ldx0r2fkcigeHuxJI0WH7AtYAT23Pt" alt="DEPI Logo" class="cert-logo-img">
@@ -662,7 +847,7 @@
                 </div>
 
                 <!-- IBM Card -->
-                <div class="cert-card" onclick="openCertModal('ibm')">
+                <div class="cert-card scroll-hidden" onclick="openCertModal('ibm')" style="transition-delay: 0.1s;">
                     <div>
                         <div class="cert-header">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM Logo" class="cert-logo-img">
@@ -679,7 +864,7 @@
                 </div>
 
                 <!-- Oracle Card -->
-                <div class="cert-card" onclick="openCertModal('oracle')">
+                <div class="cert-card scroll-hidden" onclick="openCertModal('oracle')" style="transition-delay: 0.2s;">
                     <div>
                         <div class="cert-header">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle Logo" class="cert-logo-img">
@@ -698,7 +883,7 @@
         </section>
 
         <!-- Contact Us Section -->
-        <section id="contact-us">
+        <section id="contact-us" class="scroll-hidden">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-form-container">
                 <form action="https://formspree.io/f/xljdryzr" method="POST">
@@ -753,12 +938,111 @@
                 <a href="https://www.facebook.com/ahmed.mahmoud.mahgoub.26311" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="https://www.tiktok.com/@_ahmed_mahgoub_" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://github.com/AhmedMahgoub2007" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <!-- روابط منصات العمل الحر باللوجوهات المخصصة -->
+                <a href="https://www.upwork.com/freelancers/~010a58d156da706d2c" target="_blank" title="Upwork"><img src="https://lh3.googleusercontent.com/d/1uGY9ZnGU3pVFBnXXOSc1uEusqkGMkLEy" alt="Upwork" class="footer-custom-icon"></a>
+                <a href="https://mostaql.com/u/Ahmed__Mahgoub" target="_blank" title="مستقل"><img src="https://lh3.googleusercontent.com/d/1BkyrZD2X0zDlNeMn0ehyoHKfefh131E7" alt="مستقل" class="footer-custom-icon"></a>
+                <a href="https://www.freelancer.com/u/AhmedMahoub" target="_blank" title="Freelancer"><img src="https://lh3.googleusercontent.com/d/1ySQXcJwAEPQVuT87QthpuLPjgoB61mze" alt="Freelancer" class="footer-custom-icon"></a>
+                <a href="https://khamsat.com/user/ahmed_mahgoub1897" target="_blank" title="خمسات"><img src="https://lh3.googleusercontent.com/d/1ovfgIQhqh_vzIk_4GTboj0hs35GvvGs8" alt="خمسات" class="footer-custom-icon"></a>
             </div>
             <p class="footer-copy">All Rights Reserved © 2026 - Ahmed Mahmoud Mahgoub</p>
         </div>
     </footer>
 
     <script>
+        // --- 1. Intro Screen Logic ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const introScreen = document.getElementById('intro-screen');
+                introScreen.classList.add('slide-up');
+                // Remove from DOM after animation completes to avoid blocking clicks
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                }, 1000); 
+            }, 2000); // Intro screen stays for 2 seconds
+        });
+
+        // --- 2. Mobile Menu Toggle Logic ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // --- 3. Typewriter Effect Logic ---
+        const typeWords = [
+            "Junior Data Analyst", 
+            "Excel & Power Query Expert", 
+            "Power BI Developer", 
+            "Python Programmer"
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentWord = typeWords[wordIndex];
+            const typeSpan = document.getElementById("typewriter");
+            
+            if (isDeleting) {
+                typeSpan.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeSpan.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % typeWords.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeWords.length) setTimeout(typeEffect, 2500);
+        });
+
+        // --- 4. Scroll Animations Logic ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-show');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const hiddenElements = document.querySelectorAll('.scroll-hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // Original Modal Functions
         function openProjectModal(project) {
             const content = document.getElementById('projectModalContent');
             if (project === 'superstore') {
