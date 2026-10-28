@@ -981,17 +981,17 @@
             </p>
 
             <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card scroll-hidden" onclick="openProjectModal('superstore')">
+                <!-- Project 1: Country Data Comparison -->
+                <div class="project-card scroll-hidden" onclick="openProjectModal('country')">
                     <div>
                         <div class="project-header">
-                            <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore 2019" class="project-icon-img">
+                            <img src="https://lh3.googleusercontent.com/d/1offNStLoPgSPCjA21JR4tHF0xG7rP8OR" alt="Country Data Comparison" class="project-icon-img">
                             <div>
-                                <div class="project-card-title" data-i18n="p1_title">Simple Superstore 2019</div>
-                                <span class="project-badge">Excel & Power Query</span>
+                                <div class="project-card-title" data-i18n="p1_title">Country Data Comparison</div>
+                                <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI & Data Modeling</span>
                             </div>
                         </div>
-                        <p class="project-desc" data-i18n="p1_desc">Sales & Profit performance evaluation across product categories and regions for 2019.</p>
+                        <p class="project-desc" data-i18n="p1_desc">Comprehensive data cleaning, star schema modeling, fact & dimension splitting via country ID, and visualization.</p>
                     </div>
                     <div class="project-card-footer">
                         <span data-i18n="view_details"><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
@@ -999,17 +999,35 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card scroll-hidden" onclick="openProjectModal('central')" style="transition-delay: 0.1s;">
+                <!-- Project 2: Simple Superstore 2019 Power BI -->
+                <div class="project-card scroll-hidden" onclick="openProjectModal('superstore_pbi')" style="transition-delay: 0.1s;">
                     <div>
                         <div class="project-header">
-                            <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="project-icon-img">
+                            <img src="https://lh3.googleusercontent.com/d/1xxDnBMrq9f3XVS-p_VvOfjzuzXP94gc2" alt="Simple Superstore 2019 Power BI" class="project-icon-img">
                             <div>
-                                <div class="project-card-title" data-i18n="p2_title">Central Region Analysis</div>
-                                <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced</span>
+                                <div class="project-card-title" data-i18n="p2_title">Simple Superstore 2019 (Power BI)</div>
+                                <span class="project-badge" style="background-color: #e0e7ff; color: #3730a3;">Power BI Star Schema</span>
                             </div>
                         </div>
-                        <p class="project-desc" data-i18n="p2_desc">In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.</p>
+                        <p class="project-desc" data-i18n="p2_desc">Power BI analysis featuring ETL cleaning, star schema with Customer, Product, and Order dimensions, and DAX.</p>
+                    </div>
+                    <div class="project-card-footer">
+                        <span data-i18n="view_details"><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- Project 3: Simple Superstore 2019 Excel -->
+                <div class="project-card scroll-hidden" onclick="openProjectModal('superstore_excel')" style="transition-delay: 0.2s;">
+                    <div>
+                        <div class="project-header">
+                            <img src="https://lh3.googleusercontent.com/d/19CG4CHOElkokrlk4FIhwTugAPSwg4ViX" alt="Simple Superstore 2019 Excel" class="project-icon-img">
+                            <div>
+                                <div class="project-card-title" data-i18n="p3_title">Simple Superstore 2019 (Excel)</div>
+                                <span class="project-badge">Excel & Power Query</span>
+                            </div>
+                        </div>
+                        <p class="project-desc" data-i18n="p3_desc">Sales & Profit performance evaluation across product categories and regions for 2019.</p>
                     </div>
                     <div class="project-card-footer">
                         <span data-i18n="view_details"><i class="fa-solid fa-folder-open"></i> View Details & Drive Link</span>
@@ -1218,10 +1236,12 @@
                 skill_3_desc: "Large-scale data processing, querying relational databases, and algorithmic scripting.",
                 projects_title: "Featured Projects",
                 projects_info: '<i class="fa-solid fa-circle-info"></i> Click on any project card to view its full interactive dashboard, key metrics, and Google Drive files.',
-                p1_title: "Simple Superstore 2019",
-                p1_desc: "Sales & Profit performance evaluation across product categories and regions for 2019.",
-                p2_title: "Central Region Analysis",
-                p2_desc: "In-depth regional study evaluating loss-making categories, discounts, and customer behaviors.",
+                p1_title: "Country Data Comparison",
+                p1_desc: "Comprehensive data cleaning, star schema modeling, fact & dimension splitting via country ID, and visualization.",
+                p2_title: "Simple Superstore 2019 (Power BI)",
+                p2_desc: "Power BI analysis featuring ETL cleaning, star schema with Customer, Product, and Order dimensions, and DAX.",
+                p3_title: "Simple Superstore 2019 (Excel)",
+                p3_desc: "Sales & Profit performance evaluation across product categories and regions for 2019.",
                 view_details: '<i class="fa-solid fa-folder-open"></i> View Details & Drive Link',
                 edu_title: "Education & Certifications",
                 academic_title: "Academic Education",
@@ -1270,10 +1290,12 @@
                 skill_3_desc: "معالجة البيانات ضخمة الحجم، الاستعلام من قواعد البيانات العلائقية، وكتابة السكريبتات البرمجية.",
                 projects_title: "المشاريع المميزة",
                 projects_info: '<i class="fa-solid fa-circle-info"></i> اضغط على أي مشروع لعرض لوحة التحكم التفاعلية والملفات على Google Drive.',
-                p1_title: "تحليل مبيعات متجر Superstore 2019",
-                p1_desc: "تقييم أداء المبيعات والأرباح عبر فئات المنتجات والمناطق الجغرافية لعام 2019.",
-                p2_title: "تحليل المنطقة المركزية (Central Region)",
-                p2_desc: "دراسة إقليمية متعمقة لتقييم الفئات الخاسرة، الخصومات، وسلوكيات العملاء.",
+                p1_title: "مقارنة بيانات الدول (Country Data Comparison)",
+                p1_desc: "تنظيف شامل للبيانات وضبط الأنواع، تقسيم الجداول إلى Fact وDimension وربطها عبر Country ID، معالجة القيم الفارغة وتطبيق DAX والفيزيولايزيشن.",
+                p2_title: "متجر سوبر ستور 2019 (Power BI)",
+                p2_desc: "تحليل بـ Power BI يتضمن تنظيف البيانات، نمذجة Star Schema (عملاء، منتجات، طلبات)، ربط الساب ريجون والكاتيجري، وتطبيق DAX.",
+                p3_title: "تحليل مبيعات متجر Superstore 2019 (Excel)",
+                p3_desc: "تقييم أداء المبيعات والأرباح عبر فئات المنتجات والمناطق الجغرافية لعام 2019.",
                 view_details: '<i class="fa-solid fa-folder-open"></i> عرض التفاصيل ورابط Drive',
                 edu_title: "التعليم والشهادات",
                 academic_title: "التعليم الأكاديمي",
@@ -1333,7 +1355,6 @@
             if (translations[lang] && translations[lang].typeWords) {
                 currentTypeWords = translations[lang].typeWords;
             }
-            // إعادة ضبط المؤشرات بأمان عند تغيير اللغة دون كسر اللوب
             wordIndex = 0;
             charIndex = 0;
             isDeleting = false;
@@ -1429,11 +1450,11 @@
             let typeSpeed = isDeleting ? 40 : 90;
 
             if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000; // وقت التوقف بعد اكتمال الكلمة
+                typeSpeed = 2000;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
-                wordIndex++; // الانتقال بسلاسة للكلمة التالية دون أي توقف نهائي
+                wordIndex++;
                 typeSpeed = 500;
             }
 
@@ -1464,29 +1485,158 @@
         // Modals Dynamic Content
         function openProjectModal(project) {
             const content = document.getElementById('projectModalContent');
-            if (project === 'superstore') {
+            if (project === 'country') {
+                content.innerHTML = currentLang === 'ar' ? `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">مشروع Power BI ونمذجة البيانات</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        مقارنة بيانات الدول (Country Data Comparison)
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        مشروع تحليل بيانات متقدم يركز على تنظيف البيانات، إعادة هيكلتها، وتطبيق قواعد نمذجة البيانات (Star Schema).
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1offNStLoPgSPCjA21JR4tHF0xG7rP8OR" alt="Country Data Comparison Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1pU-Bm_9mZ3Wypd4RSzVwexz0X0m3PgZ5" alt="Country Data Comparison Image 2" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1u1EfrrTNscyNlnNmVUytGYe4dc39aiUz" alt="Country Data Comparison Image 3" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1FU6UmODNqW6_cuGB_l5kKwMt4_YBWcWm" alt="Country Data Comparison Image 4" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1QViLd-rGFjqzu1Hbhe5gxqQ2ZiixkIQ7" alt="Country Data Comparison Image 5" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1Vs5LJ5C8Sd0nivZxnTIWIRUaQdh8qOEH" alt="Country Data Comparison Image 6" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1C5f0z_9t-BmpQ21jL--nbR0bPpLXZc-1" alt="Country Data Comparison Image 7" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1EBUQuhaDLbUsY__eAgU9FrA6uHTNdOrX" alt="Country Data Comparison Image 8" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1i-Kvx21Ybm0wXwfvbVqICQ8dEthaAad7" alt="Country Data Comparison Image 9" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
+                    <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>إجراء عمليات تنظيف شاملة (Cleaning) وضبط الـ Data Types للبيانات.</li>
+                        <li>تقسيم جدول البيانات الوحيد إلى عدة جداول (Fact Tables) وجداول أبعاد (Dimension Tables).</li>
+                        <li>ربط جداول الفاكت بجدول الأبعاد الأساسي <strong>dimension country</strong> باستخدام الـ <code>country ID</code>.</li>
+                        <li>معالجة القيم الفارغة (Nulls) عن طريق حذف الصفوف التي تحتوي على نسبة عالية من القيم الفارغة لضمان دقة البيانات واستقرارها.</li>
+                        <li>كتابة معادلات وتصاميم <strong>DAX</strong> وإعداد لوحات عرض مرئية (Visualization) احترافية.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/file/d/12Nta3w3tLSB2tAWIv7AifNAp7F9Q9xrn/view?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-file-pdf"></i> فتح ملف PDF الخاص بالمشروع على Google Drive
+                        </a>
+                    </div>
+                ` : `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI & Data Modeling</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        Country Data Comparison
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        Advanced data analysis project focused on deep data cleaning, restructuring, and star schema modeling.
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1offNStLoPgSPCjA21JR4tHF0xG7rP8OR" alt="Country Data Comparison Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1pU-Bm_9mZ3Wypd4RSzVwexz0X0m3PgZ5" alt="Country Data Comparison Image 2" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1u1EfrrTNscyNlnNmVUytGYe4dc39aiUz" alt="Country Data Comparison Image 3" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1FU6UmODNqW6_cuGB_l5kKwMt4_YBWcWm" alt="Country Data Comparison Image 4" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1QViLd-rGFjqzu1Hbhe5gxqQ2ZiixkIQ7" alt="Country Data Comparison Image 5" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1Vs5LJ5C8Sd0nivZxnTIWIRUaQdh8qOEH" alt="Country Data Comparison Image 6" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1C5f0z_9t-BmpQ21jL--nbR0bPpLXZc-1" alt="Country Data Comparison Image 7" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1EBUQuhaDLbUsY__eAgU9FrA6uHTNdOrX" alt="Country Data Comparison Image 8" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1i-Kvx21Ybm0wXwfvbVqICQ8dEthaAad7" alt="Country Data Comparison Image 9" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>Executed thorough data cleaning and data type casting.</li>
+                        <li>Split the single raw table into multiple Fact and Dimension tables.</li>
+                        <li>Established relationships between fact tables and the main <strong>dimension country</strong> table using <code>country ID</code>.</li>
+                        <li>Handled Null values by removing rows with excessive nulls to ensure high data quality.</li>
+                        <li>Applied <strong>DAX</strong> measures and built interactive visualizations.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/file/d/12Nta3w3tLSB2tAWIv7AifNAp7F9Q9xrn/view?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-file-pdf"></i> Open Project PDF on Google Drive
+                        </a>
+                    </div>
+                `;
+            } else if (project === 'superstore_pbi') {
+                content.innerHTML = currentLang === 'ar' ? `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #e0e7ff; color: #3730a3;">مشروع Power BI ونمذجة النجوم</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        متجر سوبر ستور 2019 (Power BI)
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        مشروع تحليل متقدم باستخدام Power BI مع بناء نموذج بيانات متكامل (Star Schema).
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1xxDnBMrq9f3XVS-p_VvOfjzuzXP94gc2" alt="Superstore PBI Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1nknBDJS92qi_5wpJZ9pTM76FmGHXFGzw" alt="Superstore PBI Image 2" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/10NjF4n3rQSN6tk6RzL-cM8d0KDjKLc__" alt="Superstore PBI Image 3" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
+                    <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>إجراء عمليات التنظيف (Cleaning) والنمذجة (Modeling) الكاملة للبيانات.</li>
+                        <li>تقسيم البيانات وفق نموذج <strong>Star Schema</strong> إلى جداول أبعاد: <strong>dimension customer</strong>، <strong>dimension product</strong>، و <strong>dimension order</strong>.</li>
+                        <li>ربط جدول العملاء (Customer Dimension) وجدول الطلبات (Order Table)، مع ربط الـ <strong>Sub-region</strong> داخل جدول العملاء بجدول الطلبات.</li>
+                        <li>ربط جدول المنتجات (Product Dimension) بجدول التصنيفات (Category).</li>
+                        <li>كتابة قياسات <strong>DAX</strong> المتقدمة وتصميم لوحات عرض مرئية (Visualization) تفاعلية.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/file/d/1u2HNwMrlMNxPJsLiYt_Axunjdjt6XHa2/view?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-file-pdf"></i> فتح ملف PDF الخاص بالمشروع على Google Drive
+                        </a>
+                    </div>
+                ` : `
+                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
+                        <span class="project-badge" style="background-color: #e0e7ff; color: #3730a3;">Power BI Star Schema Project</span>
+                    </div>
+                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        Simple Superstore 2019 (Power BI)
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
+                        Advanced Power BI analysis featuring robust data cleaning, modeling, and star schema architecture.
+                    </p>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <img src="https://lh3.googleusercontent.com/d/1xxDnBMrq9f3XVS-p_VvOfjzuzXP94gc2" alt="Superstore PBI Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1nknBDJS92qi_5wpJZ9pTM76FmGHXFGzw" alt="Superstore PBI Image 2" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/10NjF4n3rQSN6tk6RzL-cM8d0KDjKLc__" alt="Superstore PBI Image 3" class="modal-img">
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
+                    <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                        <li>Performed comprehensive data cleaning and modeling.</li>
+                        <li>Implemented a <strong>Star Schema</strong> design splitting data into <strong>Customer Dimension</strong>, <strong>Product Dimension</strong>, and <strong>Order Dimension</strong>.</li>
+                        <li>Linked Customer and Order tables, incorporating Sub-region hierarchies within customer data.</li>
+                        <li>Connected Product dimensions to Categories and established fact table relations.</li>
+                        <li>Applied <strong>DAX</strong> measures and interactive visual dashboards.</li>
+                    </ul>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="https://drive.google.com/file/d/1u2HNwMrlMNxPJsLiYt_Axunjdjt6XHa2/view?usp=drive_link" target="_blank" class="btn btn-gmail">
+                            <i class="fa-solid fa-file-pdf"></i> Open Project PDF on Google Drive
+                        </a>
+                    </div>
+                `;
+            } else if (project === 'superstore_excel') {
                 content.innerHTML = currentLang === 'ar' ? `
                     <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
                         <span class="project-badge">مشروع Excel & Power Query</span>
                     </div>
                     <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
-                        تحليل مبيعات وأرباح متجر Superstore 2019
+                        تحليل مبيعات وأرباح متجر Superstore 2019 (Excel)
                     </h2>
                     <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
                         مشروع تحليلي شامل لتقييم الأداء المالي ومحركات الأرباح عبر فئات المنتجات والمناطق الجغرافية المختلفة لعام 2019.
                     </p>
                     <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Dashboard" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/19CG4CHOElkokrlk4FIhwTugAPSwg4ViX" alt="Superstore Excel Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Excel Image 2" class="modal-img">
                     </div>
                     <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
                     <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
                         <li>تنظيف البيانات ومعالجة المرتجعات باستخدام تحويلات <strong>Power Query</strong>.</li>
                         <li>بناء نموذج بيانات متكامل وحساب صافي المبيعات والأرباح باستخدام <strong>Power Pivot & DAX</strong>.</li>
-                        <li>تقسيم المبيعات عبر المناطق (الغرب، الشرق، الوسط، والجنوب) لتحديد الولايات الأكثر ربحية.</li>
+                        <li>تقسيم المبيعات عبر المناطق لتحديد الولايات الأكثر ربحية.</li>
                         <li>تصميم لوحة تحكم تفاعلية لمتابعة اتجاهات المبيعات والأرباح شهرياً.</li>
                     </ul>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://drive.google.com/drive/folders/1TTJddObN1tGQiEfHaBExZtF72GYhnBML?usp=drive_link" target="_blank" class="btn btn-gmail">
+                        <a href="https://drive.google.com/file/d/1ERrPGCaDtNcIWkkZ61gycC8ZE53s7IlX/view?usp=drive_link" target="_blank" class="btn btn-gmail">
                             <i class="fa-solid fa-folder-open"></i> فتح ملفات المشروع على Google Drive
                         </a>
                     </div>
@@ -1495,75 +1645,24 @@
                         <span class="project-badge">Excel & Power Query Project</span>
                     </div>
                     <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
-                        Simple Superstore 2019 - Sales & Profit Analysis
+                        Simple Superstore 2019 (Excel)
                     </h2>
                     <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
                         A comprehensive analytical project evaluating financial performance and profit drivers across product categories and geographical regions for Superstore 2019.
                     </p>
                     <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Dashboard" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/19CG4CHOElkokrlk4FIhwTugAPSwg4ViX" alt="Superstore Excel Image 1" class="modal-img">
+                        <img src="https://lh3.googleusercontent.com/d/1P21Ocs-DoDKHpG9bZ66PPpUo8xMoxfyq" alt="Superstore Excel Image 2" class="modal-img">
                     </div>
                     <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
                     <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
                         <li>Cleaned data and handled returned orders using <strong>Power Query</strong> ETL transformations.</li>
                         <li>Engineered an integrated data model and calculated net sales & profit with <strong>Power Pivot & DAX</strong>.</li>
-                        <li>Segmented sales across West, East, Central, and South regions to highlight top-performing states.</li>
+                        <li>Segmented sales across regions to highlight top-performing states.</li>
                         <li>Designed an interactive <strong>Sales & Profit Performance Dashboard</strong> tracking monthly trends.</li>
                     </ul>
                     <div style="margin-top: 1.5rem;">
-                        <a href="https://drive.google.com/drive/folders/1TTJddObN1tGQiEfHaBExZtF72GYhnBML?usp=drive_link" target="_blank" class="btn btn-gmail">
-                            <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
-                        </a>
-                    </div>
-                `;
-            } else if (project === 'central') {
-                content.innerHTML = currentLang === 'ar' ? `
-                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">تحليلات Power BI متقدمة</span>
-                    </div>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
-                        تحليل أداء ومبيعات المنطقة المركزية (Central Region)
-                    </h2>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
-                        دراسة متعمقة للمنطقة المركزية لتحديد الفئات المسببة للخسائر، وتأثير الخصومات وسلوك العملاء على هامش الربح.
-                    </p>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="modal-img">
-                    </div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">أبرز النقاط والنطاق التقني:</h4>
-                    <ul style="list-style: disc; margin-right: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
-                        <li>إجراء عمليات تنظيف وتحويل بيانات متقدمة بواسطة <strong>Power Query</strong>.</li>
-                        <li>تصنيف المنتجات إلى قطاعات رابحة وخاسرة عبر مختلف الفئات.</li>
-                        <li>تحليل مبيعات العملاء وسائل الشحن وتأثير نسبة الخصومات على الأرباح.</li>
-                        <li>تطوير لوحة تحكم تفاعلية متكاملة في <strong>Power BI</strong>.</li>
-                    </ul>
-                    <div style="margin-top: 1.5rem;">
-                        <a href="https://drive.google.com/drive/folders/1WRKzEuzmsRUiKAx9uKJ3XK9mjxcoj4eV?usp=drive_link" target="_blank" class="btn btn-gmail">
-                            <i class="fa-solid fa-folder-open"></i> فتح ملفات المشروع على Google Drive
-                        </a>
-                    </div>
-                ` : `
-                    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
-                        <span class="project-badge" style="background-color: #fef3c7; color: #92400e;">Power BI Advanced Analytics</span>
-                    </div>
-                    <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.8rem;">
-                        Central Region Sales & Profit Analysis
-                    </h2>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
-                        In-depth performance study focused on the Central Region, identifying key loss-making categories, customer behavior, and shipping mode impacts on profit margins.
-                    </p>
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <img src="https://lh3.googleusercontent.com/d/1-uG2FSlYGrX5bsvYxgLwssiHYu2QpVix" alt="Central Region Dashboard" class="modal-img">
-                    </div>
-                    <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem;">Key Highlights & Technical Scope:</h4>
-                    <ul style="list-style: disc; margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
-                        <li>Executed extensive data cleaning and data type casting via <strong>Power Query</strong>.</li>
-                        <li>Classified products into Profitable vs. Loss-making segments across various categories.</li>
-                        <li>Analyzed sales distribution by customer, ship mode, and discount impacts on overall profit margin.</li>
-                        <li>Delivered an interactive multi-page <strong>Power BI Dashboard</strong> with dynamic segment filtering.</li>
-                    </ul>
-                    <div style="margin-top: 1.5rem;">
-                        <a href="https://drive.google.com/drive/folders/1WRKzEuzmsRUiKAx9uKJ3XK9mjxcoj4eV?usp=drive_link" target="_blank" class="btn btn-gmail">
+                        <a href="https://drive.google.com/file/d/1ERrPGCaDtNcIWkkZ61gycC8ZE53s7IlX/view?usp=drive_link" target="_blank" class="btn btn-gmail">
                             <i class="fa-solid fa-folder-open"></i> Open Google Drive Files
                         </a>
                     </div>
